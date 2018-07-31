@@ -1,0 +1,184 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
+//Bundles
+use BackendBundle\Entity\User;
+use BackendBundle\Entity\PrivateMessage;
+use AppBundle\Form\PrivateMessageType;
+
+/**
+ * Description of PrivateMessageController
+ *
+ * @author Celia
+ */
+class PrivateMessageController extends Controller {
+
+	private $session;
+
+	/**
+	 * CONSTRUCTOR
+	 */
+	public function __construct() {
+		$this->session = new Session();
+	}
+
+	/**
+	 * ENVIAR MENSAJE
+	 */
+	public function indexAction(Request $request) {
+
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+		$private_message = new PrivateMessage();
+		$form = $this->createForm(PrivateMessageType::class, $private_message, array(
+			'empty_data' => $user
+		));
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted()) {
+			if ($form->isValid()) {
+				//subir la imagen
+				$file = $form['image']->getData();
+
+				if (!empty($file) && $file != null) {
+					$ext = $file->guessExtension();
+
+					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
+						$file_name = $user->getId() . time() . "." . $ext;
+						$file->move("uploads/messages/images", $file_name);
+
+						$private_message->setImage($file_name);
+					} else {
+						$private_message->setImage(null);
+					}
+				} else {
+					$private_message->setImage(null);
+				}
+
+				//subir el documento
+				$doc = $form['file']->getData();
+
+				if (!empty($doc) && $doc != null) {
+					$ext = $doc->guessExtension();
+
+					if ($ext == 'pdf' || $ext == 'PDF') {
+						$file_name = $user->getId() . time() . "." . $ext;
+						$doc->move("uploads/messages/documents", $file_name);
+
+						$private_message->setFile($file_name);
+					} else {
+						$private_message->setFile(null);
+					}
+				} else {
+					$private_message->setFile(null);
+				}
+				$private_message->setEmitter($user);
+				$private_message->setCreationDate(new \DateTime("now"));
+				$private_message->setReaded(0);
+
+				$em->persist($private_message);
+				$flush = $em->flush();
+
+				if ($flush == null) {
+					$this->addFlash(
+							'notice', 'El mensaje se ha enviado correctamente'
+					);
+				} else {
+					$this->addFlash(
+							'error', 'Error al enviar el mensaje'
+					);
+				}
+			} else {
+				$this->addFlash(
+						'error', 'El mensaje privado no se ha enviado'
+				);
+			}
+
+			return $this->redirectToRoute("private_message_index");
+		}
+
+		$private_messages = $this->getPrivateMessages($request);
+		$this->setReadedMessagesAction($em, $user);
+
+		return $this->render('@App/PrivateMessage/index.html.twig', array(
+					'form' => $form->createView(),
+					'pagination' => $private_messages
+		));
+	}
+
+	//enviar
+	public function sendedAction(Request $request) {
+		$private_messages = $this->getPrivateMessages($request, "sended");
+
+		return $this->render('@App/PrivateMessage/sended.html.twig', array(
+					'pagination' => $private_messages
+		));
+	}
+
+	//mostrar mensajes enviados o recibidos
+	public function getPrivateMessages($request, $type = null) {
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+		$user_id = $user->getId();
+
+		if ($type == "sended") {
+			$dql = "SELECT p from BackendBundle:PrivateMessage p WHERE p.emitter = $user_id ORDER BY p.id DESC";
+		} else {
+			$dql = "SELECT p from BackendBundle:PrivateMessage p WHERE p.receiver = $user_id ORDER BY p.id DESC";
+		}
+
+		$query = $em->createQuery($dql);
+
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+				$query, $request->query->getInt('page', 1), 5
+		);
+		return $pagination;
+	}
+
+	//Mostrar notificaciones de mensajes
+	public function notReadedMessagesAction() {
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+
+		$private_message_repo = $em->getRepository('BackendBundle:PrivateMessage');
+		$count_not_readed = count($private_message_repo->findBy(array(
+					'receiver' => $user,
+					'readed' => 0
+		)));
+
+		return new Response($count_not_readed);
+	}
+
+//Marcar mensajes como leídos
+	private function setReadedMessagesAction($em, $user) {
+		$private_message_repo = $em->getRepository('BackendBundle:PrivateMessage');
+		$messages = $private_message_repo->findBy(array(
+			'receiver' => $user,
+			'readed' => 0
+		));
+
+		foreach ($messages as $msg) {
+			$msg->setReaded(1);
+
+			$em->persist($msg);
+		}
+
+		$flush = $em->flush();
+
+		if ($flush == null) {
+			$result = true;
+		} else {
+			$result = false;
+		}
+		return $result;
+	}
+
+}

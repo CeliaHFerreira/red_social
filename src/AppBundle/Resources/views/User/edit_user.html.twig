@@ -1,0 +1,22 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('assets/js/custom/profile.js')}}"></script>
+	<script src="{{ asset('assets/js/custom/bootbox.min.js')}}"></script>
+{% endblock %}
+{% block content %}
+	<div class="col-lg-8 form-box">
+		<h2>Cambiar mis datos</h2>
+		<hr/>
+		{{form_start(form, {'enctype':'multipart/form-data'})}}
+		{{form_end(form)}}
+		<hr/><br/>
+		<h3>Eliminar cuenta en la plataforma
+			<a class="btn-delete-user btn-sm btn-secondary float-right" href="{{path("remove")}}">
+				<i class="fa fa-times"></i> &nbsp;
+				Eliminar
+			</a>
+		</h3>
+		<div class="clearfix"></div>
+	</div>
+{% endblock %}

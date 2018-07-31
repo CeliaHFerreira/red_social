@@ -1,0 +1,41 @@
+BackendBundle\Entity\Like:
+    type: entity
+    table: likes
+    indexes:
+        fk_likes_users:
+            columns:
+                - user
+        fk_likes_melodies:
+            columns:
+                - melody
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        melody:
+            targetEntity: Melody
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                melody:
+                    referencedColumnName: id
+            orphanRemoval: false
+        user:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

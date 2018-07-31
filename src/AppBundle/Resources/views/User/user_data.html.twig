@@ -1,0 +1,49 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('assets/js/custom/email-password.js')}}"></script>
+{% endblock %}
+{% block content %}
+	<div class="col-lg-6 default-box data-box">
+		<h1>Mis datos</h1>
+		<hr/>
+		<h3>Imagen de usuario</h3>
+		<hr/>
+		<div class="avatar">
+			{% if user.image == null %}
+				<img src="{{( asset ('assets/images/default.png'))}}"/>
+			{% else %}
+				<img src="{{( asset ('uploads/users/'~user.image))}}"/>
+			{% endif%}
+		</div>
+		<br/><hr/>
+		<div class="name-surname-username">
+			<h3>Nombre y apellidos</h3>
+			<hr/>
+			<h5>{{user.name}} {{user.surname}}</h5>
+			<br/><hr/>
+			<h3>Nombre de usuario</h3>
+			<hr/>
+			<h5>{{user.username}}</h5>
+		</div>
+		<br/><hr/>
+		{% if user.description != null %}
+			<div class="description">
+				<h3>Descripción</h3>
+				<hr/>
+				<h5>{{user.description}}</h5>
+			</div>
+			<br/><hr/>
+		{% endif %}
+		<div class="email">
+			<h3>Correo electrónico</h3>
+			<hr/>
+			<h5>{{user.email}}</h5>
+		</div>
+		<br/><br/>
+		<a class="btn btn-primary btn-lg btn-block btn-data" href="edit_user_data">Cambiar datos</a>
+		<br/>
+		<a class="btn btn-info btn-lg btn-block btn-password" href="edit_password">Cambiar contraseña</a>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="col-lg-12 default-box">
+			<h1 class="header-box">
+				Mensajes Privados
+			</h1>
+			<div class="col-lg-7 form-box-message float-left">
+				<h4>Enviar nuevo mensaje privado</h4>
+				{{form_start(form, {'action':'', 'method':'POST'})}}
+				{{form_end(form)}}
+				<br/>
+				<a href="{{path('private_message_sended')}}" class="btn btn-info send-messages">Ver mensajes enviados</a>
+			</div>
+
+			<div class="col-lg-5 float-right">
+				<br/>
+				<h4>Mensajes recibidos</h4>
+				<hr/>
+				<div class="box-content box-messages">
+					{% for message in pagination %}
+						<div class="col-lg-12 melody-item">
+							<div class="avatar">
+								{% if message.emitter.image == null %}
+									<img src="{{( asset ('assets/images/default.png'))}}"/>
+								{% else %}
+									<img src="{{( asset ('uploads/users/'~message.emitter.image))}}"/>
+								{% endif%}
+							</div>
+							<div class="melody-content">
+								<p>
+									<a class="melody-name-link" href="{{ path('user_profile', {'username': message.emitter.username}) }}">
+										{{message.emitter.name}} {{message.emitter.surname}}
+									</a>
+									-
+									{{message.emitter.username}}
+									<br/>
+									<span class="melody-date">
+										{{message.creationDate|time}}
+									</span>
+								</p>
+								<p>{{message.text}}</p>
+								{% if (message.file is defined ) and (message.file != null) %}
+									<a href="{{asset('uploads/messages/documents/'~message.file)}}"
+									   class="btn-doc" aria-hidden="true" target="_blank">
+										<i class="fa fa-file"></i>
+									</a>
+								{% endif %}
+								{% if (message.image is defined ) and (message.image != null) %}
+									<a href="{{asset('uploads/messages/images/'~message.image)}}"
+									   class="btn-image" aria-hidden="true" target="_blank">
+										<i class="fa fa-camera"></i>
+									</a>
+								{% endif %}
+							</div>
+							<div class="clearfix"></div>
+							<hr/>
+						</div>
+					{% endfor %}
+					<div class="navigation">
+						{{ knp_pagination_render(pagination) }}
+					</div>
+				</div>
+
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+{% endblock %}

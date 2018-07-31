@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset = "utf-8" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+		<title>
+			{% block title %} MeloDJ {% endblock %}
+		</title>
+
+		{% block stylesheets %} 
+			<!-- estilos css -->
+			<link href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}" type = "text/css" rel="stylesheet" />
+			<link href="{{ asset('assets/css/bootstrap.min.css')}}" type = "text/css" rel="stylesheet" />
+			<link href="{{ asset('assets/css/styles.css')}}" type = "text/css" rel="stylesheet" />
+			<link href="{{ asset('assets/css/fontawesome-all.css"')}}" rel="stylesheet">
+		{% endblock %}
+
+		{% block javascripts %} 
+			<!-- javascripts -->
+			<script type="text/javascript">
+				var URL = "{{ app.request.getSchemeAndHttpHost() }}/red_social/web/app_dev.php";
+			</script>
+			<script src="{{ asset('assets/js/jquery.min.js')}}"></script>
+			<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+			<script src="{{ asset('assets/js/jquery-ias.min.js')}}"></script>
+			<script src="{{ asset('assets/js/custom/common.js')}}"></script>
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="{{path("app_homepage")}}">
+					<i class="fa fa-music"></i>
+					&nbsp;
+					MeloDJ
+				</a>
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse" id="navbarColor01" style="">
+					<ul class="nav navbar-nav">
+						{% if app.user == null %}
+							<li>
+								<a class="nav-link" href="{{path("login")}}">
+									<i class="fa fa-arrow-circle-right"></i>
+									Entrar
+								</a>
+							</li>
+							<li>
+								<a class="nav-link" href="{{path("register")}}">
+									<i class="fa fa-user"></i>
+									Registro
+								</a>
+							</li>
+						{% else %}
+							<li>
+								<a class="nav-link" href="{{path("app_homepage")}}">
+									<i class="fa fa-home"></i>
+									Inicio
+								</a>
+							</li>
+							<li>
+								<a class="nav-link" href="{{path("users_list")}}">
+									<i class="fa fa-users"></i>
+									Usuarios
+								</a>
+							</li>
+							&nbsp;
+							<li>
+								<form action="{{path("users_search")}}" class="form-inline my-2 my-lg-0">
+									<input class="form-control mr-sm-2" placeholder="Buscar" type="text" name="search">
+									<button class="btn btn-secondary my-2 my-sm-0" type="submit">
+										<i class="fa fa-search"></i>
+									</button>
+								</form>
+							</li>
+							&nbsp;
+						{% endif %}
+					</ul>
+					{% if app.user != null %}
+						<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="{{path("notifications_page")}}">
+									<i class="fa fa-bell"></i>
+									Notificaciones
+									<span class="alert alert-danger label-notifications"></span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{path("private_message_index")}}">
+									<i class="fa fa-paper-plane"></i>
+									Mensajes 
+									<span class="alert alert-danger label-notifications-msg d-none"></span>
+								</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+									<div class="avatar">
+										{% if app.user.image == null %}
+											<img src="{{asset('assets/images/default.png')}}"></img>
+										{% else %}
+											<img src="{{asset('uploads/users/'~app.user.image)}}"></img>
+										{% endif %}
+									</div>
+									{{ app.user.name }} {{app.user.surname}}
+								</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href={{ path('user_profile', {'username': app.user.username })}}>
+										<i class="fa fa-user"></i> &nbsp;
+										Mi perfil
+									</a>
+									<a class="dropdown-item" href="{{path("user_data")}}">
+										<i class="fa fa-cogs"></i> &nbsp;
+										Mis datos
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{path("logout")}}">
+										<i class="fa fa-arrow-circle-left"></i> &nbsp;
+										Salir
+									</a>
+									<a class="dropdown-item" href="{{path("contact")}}">
+										<i class="fa fa-question-circle"></i> &nbsp;
+										Ayuda
+									</a>
+
+
+								</div>
+							</li>
+						</ul>
+					{% endif %}
+					{% if app.user == null %}
+						<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="{{path("contact")}}">
+									<i class="fa fa-question-circle"></i> &nbsp;
+									Ayuda
+								</a>
+							</li>
+						</ul>
+					{% endif %}
+				</div>
+			</nav>
+		</header>
+		<section id="content">
+			<div class="container">
+				<div class="col-lg-12">
+					{% for flash_message in app.session.flashbag.get('notice') %}
+						<div class="flash-message alert alert-success">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+					{% for flash_message in app.session.flashbag.get('error') %}
+						<div class="flash-message alert alert-danger">
+							{{ flash_message }}
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+			<div class="clearfix"></div>
+
+			{% block content %} 
+				<!-- content -->
+			{% endblock %}
+		</section>
+		<footer>
+			<footer class="col-lg-12">
+				<hr/>
+				<div class="container">
+					<p class="text-muted">TFG Celia Herrera Ferreira</p>
+				</div>
+			</footer>
+	</body>
+</html>

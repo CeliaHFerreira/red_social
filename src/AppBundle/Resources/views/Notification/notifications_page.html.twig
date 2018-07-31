@@ -1,0 +1,40 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="col-lg-12 default-box notification-box">
+			<h1 class="header-box">
+				Notificaciones
+			</h1>
+			<div class="box-content">
+				{% for notification in pagination %}
+					<div class="col-lg-12 notification-item">
+						<div class="alert alert-default">
+							{% set notificationUser = notification.typeId|get_user %}
+							{% set notificationMelody = notification.extra|get_melody %}
+
+							{% if notification.type == "follow" %}
+								<span class="badge badge-info float-left not-default">
+									<i  class="fa fa-users" aria-hidden="true"></i>
+								</span>
+								<p class="text-primary float-left"> <a class="user-link" href="{{ path('user_profile', {'username':notificationUser.username}) }}">{{notificationUser.name}} {{notificationUser.surname}}</a> ha comenzado a seguirte</p>
+							{% endif %}
+							{% if notification.type == "like" %}
+								<span class="badge badge-info float-left not-default">
+									<i  class="fas fa-heart" aria-hidden="true"></i>
+								</span>
+								<p class="text-primary float-left"> <a class="user-link" href="{{ path('user_profile', {'username':notificationUser.username}) }}">{{notificationUser.name}} {{notificationUser.surname}}</a> le ha gustado una de tus  <a class="user-link" href="{{ path('see_melody', {'id':notificationMelody.id}) }}">melodías</a></p>
+							{% endif %}
+							{% if notification.type == "assest" %}
+								<span class="badge badge-info float-left not-default">
+									<i  class="fas fa-comment" aria-hidden="true"></i>
+								</span>
+								<p class="text-primary float-left"> <a class="user-link" href="{{ path('user_profile', {'username':notificationUser.username}) }}">{{notificationUser.name}} {{notificationUser.surname}}</a> ha comentado una de tus <a class="user-link" href="{{ path('see_melody', {'id':notificationMelody.id}) }}">melodías</a></p>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

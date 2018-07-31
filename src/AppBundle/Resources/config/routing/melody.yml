@@ -1,0 +1,31 @@
+home_melodies:
+    path: /home
+    defaults: { _controller: AppBundle:Melody:index }
+
+remove_melody:
+    path: /melody/remove/{id}
+    defaults: { _controller: AppBundle:Melody:removeMelody, id: null }
+
+see_melody:
+    path: /melody/{id}
+    defaults : { _controller: AppBundle:Melody:commentMelody, id: null }
+    
+delete_assest:
+    path: /delete_assest/{id}
+    defaults : { _controller: AppBundle:Melody:deleteComment, id: null }
+
+music:
+    path: /music
+    defaults: { _controller: AppBundle:Melody:music }
+    
+like_melody:
+    path: /like/{id}
+    defaults: { _controller: AppBundle:Melody:like, id:null }
+    
+unlike_melody:
+    path: /unlike/{id}
+    defaults: { _controller: AppBundle:Melody:unlike, id:null }
+    
+score_melody:
+    path: /score/{id}/{value}
+    defaults: { _controller: AppBundle:Melody:score, id:null, value:null }

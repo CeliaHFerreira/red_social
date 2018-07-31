@@ -1,0 +1,58 @@
+login:
+    path: /login
+    defaults: { _controller: AppBundle:User:login }
+    
+login_check:
+    path: /login_check
+    
+logout:
+    path: /logout
+
+register:
+    path: /register
+    defaults: { _controller: AppBundle:User:register }
+
+user_username_test:
+    path: /username_test
+    defaults: { _controller: AppBundle:User:usernameTest }
+    methods: [POST]
+    
+key_password:
+    path: /key_password
+    defaults: { _controller: AppBundle:User:keyPassword }
+    
+forget_password:
+    path: /forget_password
+    defaults: { _controller: AppBundle:User:forgetPassword }
+    
+user_data:
+    path: /user_data
+    defaults: { _controller: AppBundle:User:seeUser }
+
+edit_user_data:
+    path: /edit_user_data
+    defaults: { _controller: AppBundle:User:editUser }
+
+key_change_password:
+    path: /sendKey
+    defaults: { _controller: AppBundle:User:sendKey }
+
+edit_password:
+    path: /edit_password
+    defaults: { _controller: AppBundle:User:editPassword }
+    
+#users_list:
+#    path: /users_list
+#    defaults: { _controller: AppBundle:User:users }
+#    
+#users_search:
+#    path: /search
+#    defaults: { _controller: AppBundle:User:search }
+#
+#user_profile:
+#    path: /user/{username}
+#    defaults : { _controller: AppBundle:User:profile, username: null }
+    
+remove:
+    path: /remove
+    defaults: { _controller: AppBundle:User:removeAccount }

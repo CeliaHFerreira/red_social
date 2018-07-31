@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/User/user_data.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/config/routing/melody.yml</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music2.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/prueba.js</file>
+            <file>file:/C:/wamp64/www/red_social/src/BackendBundle/Entity/Score.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Twig/ScoreExtension.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Layouts/layout_base.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/css/styles.css</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/MelodyController.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/User/register.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/css/music.css</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/UserController.php</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/music.js</file>
+        </group>
+    </open-files>
+</project-private>

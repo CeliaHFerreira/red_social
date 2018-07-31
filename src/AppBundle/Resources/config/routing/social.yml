@@ -1,0 +1,29 @@
+following_follow:
+    path: /follow
+    defaults: { _controller: AppBundle:Social:follow }
+    methods: [POST]
+
+following_unfollow:
+    path: /unfollow
+    defaults: { _controller: AppBundle:Social:unfollow }
+    methods: [POST]
+
+following_users:
+    path: /following/{username}
+    defaults : { _controller: AppBundle:Social:following, username: null }
+    
+followed_users:
+    path: /followed/{username}
+    defaults : { _controller: AppBundle:Social:followed, username: null }
+    
+users_list:
+    path: /users_list
+    defaults: { _controller: AppBundle:Social:users }
+    
+users_search:
+    path: /search
+    defaults: { _controller: AppBundle:Social:search }
+
+user_profile:
+    path: /user/{username}
+    defaults : { _controller: AppBundle:Social:profile, username: null }

@@ -1,0 +1,92 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('assets/js/custom/users.js')}}"></script>
+{% endblock %}
+{% block content %}
+	<div class="col-lg-10 default-box">
+		{% if type == 'following' %}
+			<h1 class="header-box">Siguiendo</h1>
+		{% else %}
+			<h1 class="header-box">Seguidores</h1>
+		{% endif %}
+		<div class="count">
+			{#<span class="label label-primary">
+				Usuarios Totales: {{ pagination.getTotalItemCount }}
+			</span>#}
+			<div class="box-content users-box">
+				{% for follow in pagination %}
+					{% if type == 'following' %}
+						{% set user = follow.followed %}
+					{% else %}
+						{% set user = follow.user %}
+					{% endif %}
+
+
+					<div class="col-lg-12 user-item">
+						<div class="avatar">
+							{% if user.image == null %}
+								<img src="{{( asset ('assets/images/default.png'))}}"/>
+							{% else %}
+								<img src="{{( asset ('uploads/users/'~user.image))}}"/>
+							{% endif%}
+						</div>
+						<div class="user-item-content">
+							<p>
+								<a class="user-link" href="{{ path('user_profile', {'username': user.username}) }}">
+									{{user.name}} {{user.surname}} 
+								</a>
+								- {{user.username}}
+							</p>
+							<p class="col-lg-8">{{user.description}}</p>
+							{% if app.user.id != user.id %}
+								<div class="float-right buttons-following">
+									<button class="btn btn-sm btn-info btn-follow
+											{% if app.user|following(user) == true%}
+												d-none
+											{% endif %}" 
+											data-followed="{{user.id}}">
+										<i class="fa fa-user-plus" aria-hidden="true"></i>
+										Añadir
+									</button>
+									<button class="btn btn-sm btn-danger btn-unfollow
+											{% if app.user|following(user) == false%}
+												d-none										
+											{% endif %}" 
+											data-followed="{{user.id}}">
+										<i class="fa fa-user-times" aria-hidden="true"></i>
+										Eliminar
+									</button>
+								</div>
+							{% endif %}
+						</div>
+						<div class="clearfix"></div>
+						<hr/>
+					</div>
+				{% endfor %}
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			{# Esto no va, cambiar por paginacion doctrine o buscar implementacion para bootstrap 4 #}
+
+			{% if pagination.getTotalItemCount > 1 %}
+				<ul class="pagination">
+					<a class="page-link" href="#">
+						{{ knp_pagination_render(pagination) }}
+					</a>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

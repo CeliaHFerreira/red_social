@@ -1,0 +1,7 @@
+contact:
+    path: /contact
+    defaults: { _controller: AppBundle:Contact:contact }
+    
+activate:
+    path: /activate
+    defaults: { _controller: AppBundle:Contact:activate }

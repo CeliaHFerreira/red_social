@@ -1,0 +1,9 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+{% block content %}
+	<div class="col-lg-4 form-box">
+		<h2>Activar cuenta</h2>
+		<hr/>
+		<p>Introduzca la clave de activación que se ha enviado al correo electrónico {{correo}}</p>
+		{{form(form)}}
+	</div>
+{% endblock %}

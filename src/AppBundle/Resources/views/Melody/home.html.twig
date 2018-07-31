@@ -1,0 +1,147 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('assets/js/custom/home.js')}}"></script>
+	<script src="{{ asset('assets/js/custom/bootbox.min.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="col-lg-4 default-box float-left" id="user-information">
+			<div class="avatar">
+				{% if app.user.image == null %}
+					<img src="{{asset('assets/images/default.png')}}"></img>
+				{% else %}
+					<img src="{{asset('uploads/users/'~app.user.image)}}"></img>
+				{% endif %}
+			</div>
+			<div class="name-surname">
+				<a href="{{ path('user_profile', {'username': app.user.username}) }}">
+					{{app.user.name}} {{app.user.surname}}
+				</a>
+				<div class="clearfix"></div>
+				<span class="username">
+					{{app.user.username}}
+				</span>
+			</div>
+			<div class="clearfix"></div>
+			<hr/>
+
+			{% set user_statistics = app.user|user_statistics %}
+
+			<div class="following-statistics">
+				<a href="{{ path('following_users', {'username': app.user.username}) }}">
+					<span class="label-stat">
+						Siguiendo
+					</span>
+					<span class="num-stat">
+						{{user_statistics.following}}
+					</span>
+				</a>
+			</div>
+
+			<div class="following-statistics">
+				<a href="{{ path('followed_users', {'username': app.user.username}) }}">
+					<span class="label-stat">
+						Seguidores
+					</span>
+					<span class="num-stat">
+						{{user_statistics.followers}}
+					</span>
+				</a>
+			</div>
+
+			<div class="following-statistics">
+				<a href="{{ path('user_profile', {'username': app.user.username}) }}">
+					<span class="label-stat">
+						Melodías
+					</span>
+					<span class="num-stat">
+						{{user_statistics.melodies}}
+					</span>
+				</a>
+			</div>
+
+			<div class="col-12 float-left" id="new-melody">
+				<hr/>
+				<h2 class="header-box-2">Crear melodía</h2>
+				{{form_start(form, {action: '', 'method': 'POST'})}}
+				{{form_end(form)}}
+				<hr/>
+			</div>
+		</div>
+		<div id="timeline" class="col-lg-7 default-box float-left">
+			<h1 class="header-box">Timeline</h1>
+			<div class="box-content">
+				{% for melody in pagination %}
+					<div class="col-lg-12 melody-item">
+						<div class="avatar">
+							{% if melody.user.image == null %}
+								<img src="{{( asset ('assets/images/default.png'))}}"/>
+							{% else %}
+								<img src="{{( asset ('uploads/users/'~melody.user.image))}}"/>
+							{% endif%}
+						</div>
+						<div class="melody-content">
+							<p>
+								<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
+									{{melody.user.name}} {{melody.user.surname}}
+								</a>
+								-
+								{{melody.user.username}}
+								<br/>
+								<span class="melody-date">
+									{{melody.creationDate|time}}
+								</span>
+							</p>
+							<p>{{melody.name}}</p>
+							<div><audio id="melody-midi" controls preload="metadata">
+									<source src="{{( asset ('assets/images/funk.mid'))}}" type="audio/mid">
+									Your browser does not support the audio element.
+								</audio>
+							</div>
+							<div class="float-right options">
+								{% if(melody.user.id is defined) and (melody.user.id == app.user.id) %}
+									<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
+										<i  class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+								{% endif %}
+								<a data-id="{{melody.id}}" class="btn btn-info btn-assesment" href="{{ path('see_melody', {'id': melody.id}) }}">
+									<i  class="fa fa-comment" aria-hidden="true"></i>
+								</a>
+								<button data-id="{{melody.id}}" 
+										class="
+										{% if app.user|liked(melody) == true %}
+											d-none
+										{% endif %}
+										btn btn-outline-danger btn-like
+										">
+									<i  class="fa fa-heart" aria-hidden="true"></i>
+								</button>
+								<button data-id="{{melody.id}}" 
+										class="
+										{% if app.user|liked(melody) == false %}
+											d-none
+										{% endif %}
+										btn btn-danger btn-unlike
+										">
+									<i  class="fa fa-heart" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+						<hr/>
+						<div class="clearfix"></div>
+					</div>
+				{% endfor %}
+				<div class="navigation">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>	
+		</div>
+
+	</div>
+	<div class="clearfix">
+	</div>
+{% endblock %}
+
