@@ -83,69 +83,71 @@
 			<div class="clearfix"></div>
 		</div>
 
-	<div class="col-lg-10 default-box profile-box">
-		<div id="user-melodies">
-			{% for melody in pagination %}
-				<div class="col-lg-12 melody-item">
-					<div class="avatar">
-						{% if melody.user.image == null %}
-							<img src="{{( asset ('assets/images/default.png'))}}"/>
-						{% else %}
-							<img src="{{( asset ('uploads/users/'~melody.user.image))}}"/>
-						{% endif%}
-					</div>
-					<div class="melody-content">
-						<p>
-							<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
-								{{melody.user.name}} {{melody.user.surname}}
-							</a>
-							<i class="fa fa-caret-right"></i>
-							{{melody.user.username}}
-							<br/>
-							<span class="melody-date">
-								{{melody.creationDate|time}}
-							</span>
-						</p>
-						<p>{{melody.name}}</p>
-						<div class="float-right profile-options">
-							{% if(melody.user.id is defined) and (melody.user.id == app.user.id) %}
-								<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
-									<i  class="fa fa-trash" aria-hidden="true"></i>
-								</button>
-								<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
-									<i  class="fa fa-eye" aria-hidden="true"></i>
-								</a>
-							{% endif %}
-							<a data-id="{{melody.id}}" class="btn btn-info btn-assesment" href="{{ path('see_melody', {'id': melody.id}) }}">
-								<i  class="fa fa-comment" aria-hidden="true"></i>
-							</a>
-							<button data-id="{{melody.id}}" 
-									class="
-									{% if app.user|liked(melody) == true %}
-										d-none
-									{% endif %}
-									btn btn-secondary btn-like
-									">
-								<i  class="fa fa-heart" aria-hidden="true"></i>
-							</button>
-							<button data-id="{{melody.id}}" 
-									class="
-									{% if app.user|liked(melody) == false %}
-										d-none
-									{% endif %}
-									btn btn-danger btn-unlike
-									">
-								<i  class="fa fa-heart" aria-hidden="true"></i>
-							</button>
+		<div class="col-lg-10 default-box profile-box">
+			<div id="user-melodies">
+				{% for melody in pagination %}
+					<div class="col-lg-12 melody-item">
+						<div class="avatar">
+							{% if melody.user.image == null %}
+								<img src="{{( asset ('assets/images/default.png'))}}"/>
+							{% else %}
+								<img src="{{( asset ('uploads/users/'~melody.user.image))}}"/>
+							{% endif%}
 						</div>
+						<div class="melody-content">
+							<p>
+								<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
+									{{melody.user.name}} {{melody.user.surname}}
+								</a>
+								<i class="fa fa-caret-right"></i>
+								{{melody.user.username}}
+								<br/>
+								<span class="melody-date">
+									{{melody.creationDate|time}}
+								</span>
+							</p>
+							<p>{{melody.name}}</p>
+							<div class="float-right profile-options">
+								{% if(melody.user.id is defined) and (melody.user.id == app.user.id) %}
+									<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
+										<i  class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+									{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+										<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
+											<i  class="fa fa-eye" aria-hidden="true"></i>
+										</a>
+									{% endif %}
+								{% endif %}
+								<a data-id="{{melody.id}}" class="btn btn-info btn-assesment" href="{{ path('see_melody', {'id': melody.id}) }}">
+									<i  class="fa fa-comment" aria-hidden="true"></i>
+								</a>
+								<button data-id="{{melody.id}}" 
+										class="
+										{% if app.user|liked(melody) == true %}
+											d-none
+										{% endif %}
+										btn btn-secondary btn-like
+										">
+									<i  class="fa fa-heart" aria-hidden="true"></i>
+								</button>
+								<button data-id="{{melody.id}}" 
+										class="
+										{% if app.user|liked(melody) == false %}
+											d-none
+										{% endif %}
+										btn btn-danger btn-unlike
+										">
+									<i  class="fa fa-heart" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<hr/>
 					</div>
-					<div class="clearfix"></div>
-					<hr/>
+				{% endfor %}
+				<div class="navigation">
+					{{ knp_pagination_render(pagination) }}
 				</div>
-			{% endfor %}
-			<div class="navigation">
-				{{ knp_pagination_render(pagination) }}
 			</div>
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}

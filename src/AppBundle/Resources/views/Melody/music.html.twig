@@ -44,4 +44,9 @@
 	<p id='fineprint'>Uses samples from <a href='https://www.polyphone-soundfonts.com/en/files/27-instrument-sets/256-sgm-v2-01'>SGM</a> with modifications by <a href="https://sites.google.com/site/soundfonts4u/">John Nebauer</a>.  May work poorly on mobile.
 
 		<script src="{{ asset('assets/js/custom/music.js')}}"></script>
+		
+	<div class="default-box col-lg-4" id="new-melody">
+		{{form_start(form, {action: '', 'method': 'POST'})}}
+					{{form_end(form)}}
+	</div>
 	{% endblock %}

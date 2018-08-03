@@ -40,9 +40,11 @@
 						<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
 							<i  class="fa fa-trash" aria-hidden="true"></i>
 						</button>
-						<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
-							<i  class="fa fa-eye" aria-hidden="true"></i>
-						</a>
+						{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+							<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
+								<i  class="fa fa-eye" aria-hidden="true"></i>
+							</a>
+						{% endif %}
 					{% endif %}
 					<button data-id="{{melody.id}}" 
 							class="

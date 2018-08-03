@@ -51,22 +51,22 @@ class MelodyController extends Controller {
 		if ($form->isSubmitted()) {
 			if ($form->isValid()) {
 				//upload image
-				$file = $form['image']->getData();
-
-				if (!empty($file) && $file != null) {
-					$ext = $file->guessExtension();
-
-					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
-						$file_name = $user->getId() . time() . "." . $ext;
-						$file->move("uploads/melodies/images", $file_name);
-
-						$melody->setImage($file_name);
-					} else {
-						$melody->setImage(null);
-					}
-				} else {
-					$melody->setImage(null);
-				}
+//				$file = $form['image']->getData();
+//
+//				if (!empty($file) && $file != null) {
+//					$ext = $file->guessExtension();
+//
+//					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
+//						$file_name = $user->getId() . time() . "." . $ext;
+//						$file->move("uploads/melodies/images", $file_name);
+//
+//						$melody->setImage($file_name);
+//					} else {
+//						$melody->setImage(null);
+//					}
+//				} else {
+//					$melody->setImage(null);
+//				}
 
 				//upoad document
 				$midi = $form['melody']->getData();
@@ -74,7 +74,7 @@ class MelodyController extends Controller {
 				if (!empty($midi) && $midi != null) {
 					$ext = $midi->guessExtension();
 
-					if ($ext == 'pdf' || $ext == 'PDF') {
+					if ($ext == 'mid' || $ext == 'MID') {
 						$file_name = $user->getId() . time() . "." . $ext;
 						$midi->move("uploads/melodies/midis", $file_name);
 
@@ -332,7 +332,74 @@ class MelodyController extends Controller {
 	}
 
 	public function musicAction(Request $request) {
-		return $this->render('@App/Melody/music.html.twig');
+		$em = $this->getDoctrine()->getManager();
+		$melody = new Melody();
+		$form = $this->createForm(MelodyType::class, $melody);
+		$form->handleRequest($request);
+		if ($form->isSubmitted()) {
+			if ($form->isValid()) {
+				//upload image
+//				$file = $form['image']->getData();
+//
+//				if (!empty($file) && $file != null) {
+//					$ext = $file->guessExtension();
+//
+//					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
+//						$file_name = $user->getId() . time() . "." . $ext;
+//						$file->move("uploads/melodies/images", $file_name);
+//
+//						$melody->setImage($file_name);
+//					} else {
+//						$melody->setImage(null);
+//					}
+//				} else {
+//					$melody->setImage(null);
+//				}
+
+				//upoad document
+				$midi = $form['melody']->getData();
+
+				if (!empty($midi) && $midi != null) {
+					$ext = $midi->guessExtension();
+
+					if ($ext == 'mid' || $ext == 'MID') {
+						$file_name = $user->getId() . time() . "." . $ext;
+						$midi->move("uploads/melodies/midis", $file_name);
+
+						$melody->setMelody($file_name);
+					} else {
+						$melody->setMelody(null);
+					}
+				} else {
+					$melody->setMelody(null);
+				}
+
+				$melody->setUser($user);
+				$melody->setCreationDate(new \DateTime("now"));
+
+				$em->persist($melody);
+				$fush = $em->flush();
+
+				if ($fush == null) {
+					$this->addFlash(
+							'notice', 'La melodía se ha creado correctamentee'
+					);
+				} else {
+					$this->addFlash(
+							'error', 'Error al añadir la melodía'
+					);
+				}
+			} else {
+				$this->addFlash(
+						'error', 'La melodía no puede ser creada ya que han existido errores en el formulario'
+				);
+			}
+
+			return $this->redirectToRoute('app_homepage');
+		}
+		return $this->render('@App/Melody/music.html.twig', array(
+					'form' => $form->createView()
+		));
 	}
 
 	/**

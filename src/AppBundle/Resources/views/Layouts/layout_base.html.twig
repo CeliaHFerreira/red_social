@@ -34,7 +34,7 @@
 					&nbsp;
 					MeloDJ
 				</a>
-					&nbsp;
+				&nbsp;
 				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -80,18 +80,29 @@
 						{% endif %}
 					</ul>
 					{% if app.user != null %}
-						<ul class="nav navbar-nav ml-auto">
-							<li type="button" class="btn btn-primary">
-								<a class="nav-link" href="{{path("music")}}">
-									<i class="fa fa-music"></i>
-								</a>
-							</li>
-						</ul>
+						{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+							<ul class="nav navbar-nav ml-auto">
+								<li type="button" class="btn btn-primary">
+									<a class="nav-link" href="{{path("music")}}">
+										<i class="fa fa-music"></i>
+									</a>
+								</li>
+							</ul>
+						{%else%}
+							<ul class="nav navbar-nav ml-auto">
+								<li type="button" class="btn btn-primary">
+									<a class="nav-link" href="{{path("app_homepage")}}">
+										<i class="fa fa-music"></i>
+									</a>
+								</li>
+							</ul>
+						{%endif%}
 						<ul class="nav navbar-nav ml-auto">
 							<li class="nav-item">
 								<a class="nav-link" href="{{path("notifications_page")}}">
 									<i class="fa fa-bell"></i>
-									Notificaciones
+
+
 									<span class="alert alert-danger label-notifications"></span>
 								</a>
 							</li>
