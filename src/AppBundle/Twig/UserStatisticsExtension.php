@@ -26,6 +26,7 @@ class UserStatisticsExtension extends \Twig_Extension {
 	public function userStatisticsFilter($user) {
 		$following_repo = $this->doctrine->getRepository('BackendBundle:Following');
 		$melody_repo = $this->doctrine->getRepository('BackendBundle:Melody');
+		$like_repo = $this->doctrine->getRepository('BackendBundle:Like');
 
 		//Sacar las estadisticas de cada categoría (siguiendo, seguidores y melodías)
 		$user_following = $following_repo->findBy(array(
@@ -34,6 +35,9 @@ class UserStatisticsExtension extends \Twig_Extension {
 		$user_followers = $following_repo->findBy(array(
 			'followed' => $user
 		));
+		$user_likes = $like_repo->findBy(array(
+			'user' => $user
+		));
 		$user_melodies = $melody_repo->findBy(array(
 			'user' => $user
 		));
@@ -41,6 +45,7 @@ class UserStatisticsExtension extends \Twig_Extension {
 		$result = array(
 			'following' => count($user_following),
 			'followers' => count($user_followers),
+			'likes' => count($user_likes),
 			'melodies' => count($user_melodies)
 		);
 

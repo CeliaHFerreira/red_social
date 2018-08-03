@@ -1,9 +1,9 @@
 $(document).ready(function () {
 	var ias = jQuery.ias({
-		container: '#timeline .box-content',
+		container: '.default-box #user-melodies',
 		item: '.melody-item',
-		pagination: '#timeline .pagination',
-		next: '#timeline .pagination .next_link',
+		pagination: '.default-box .pagination',
+		next: '.pagination .next_link',
 		triggerPageThreshold: 5
 	});
 
@@ -110,7 +110,8 @@ function buttons() {
 	
 	//puntuar melodía
 	$(".a-star").unbind('click').click(function () {
-		
+		$(this).parent().addClass("d-none");
+		$(this).parent().parent().find('.ec-scored').removeClass("d-none");
 		$.ajax({
 			url: URL + '/score/' + $(this).attr("data-id") + '/' + $(this).attr("data-value"),
 			type: 'GET',

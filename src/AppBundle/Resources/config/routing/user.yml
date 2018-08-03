@@ -41,18 +41,6 @@ edit_password:
     path: /edit_password
     defaults: { _controller: AppBundle:User:editPassword }
     
-#users_list:
-#    path: /users_list
-#    defaults: { _controller: AppBundle:User:users }
-#    
-#users_search:
-#    path: /search
-#    defaults: { _controller: AppBundle:User:search }
-#
-#user_profile:
-#    path: /user/{username}
-#    defaults : { _controller: AppBundle:User:profile, username: null }
-    
 remove:
     path: /remove
     defaults: { _controller: AppBundle:User:removeAccount }

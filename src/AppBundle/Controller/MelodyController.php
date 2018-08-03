@@ -184,6 +184,14 @@ class MelodyController extends Controller {
 			$em->remove($notification);
 			$flush = $em->flush();
 		}
+		$score_repo = $em->getRepository('BackendBundle:Score');
+		$scores = $score_repo->findBy(array(
+			'melody' => $id
+		));
+		foreach ($scores as $score) {
+			$em->remove($score);
+			$flush = $em->flush();
+		}
 		$user = $this->getUser();
 
 		//Condición de que solo borraremos la melodía si somos los propietarios de ella
@@ -244,6 +252,7 @@ class MelodyController extends Controller {
 				);
 			}
 			$comments = $this->getComments($request, $melody);
+			
 			return $this->render('@App/Melody/melody.html.twig', array(
 						'melody' => $melody,
 						'form' => $form->createView(),
@@ -392,6 +401,39 @@ class MelodyController extends Controller {
 		}
 		return new Response($status);
 	}
+	
+	
+	//Ver Me gustas
+	public function likedAction(Request $request, $username = null) {
+		$em = $this->getDoctrine()->getManager();
+
+		if ($username != null) {
+			$user_repo = $em->getRepository("BackendBundle:User");
+			$user = $user_repo->findOneBy(array("username" => $username));
+		} else {
+			$user = $this->getUser();
+		}
+		if (empty($user) || !is_object($user)) {
+			return $this->redirect($this->generateUrl('app_homepage'));
+		}
+
+		$user_id = $user->getId();
+		$dql = "SELECT l FROM BackendBundle:Like l WHERE l.user = $user_id ORDER BY l.id DESC";
+		$query = $em->createQuery($dql);
+
+		$paginator = $this->get('knp_paginator');
+		$like = $paginator->paginate(
+				$query, $request->query->getInt('page', 1), 5
+		);
+
+		return $this->render('@App/Melody/likes.html.twig', array(
+					'user' => $user,
+					'pagination' => $like
+		));
+	}
+	
+	
+	
 
 	//VALORACION DE MELODIAAAS
 
@@ -442,6 +484,66 @@ class MelodyController extends Controller {
 		}
 
 		return new Response($status);
+	}
+	
+	//Estadísticas melodía
+	public function statsMelodyAction(Request $request, $id = null){
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+		$melody_repo = $em->getRepository('BackendBundle:Melody');
+		$melody = $melody_repo->find($id);
+		$owner = $melody->getUser();
+
+		$likes = $this->getLikes($request, $melody);
+		$scores = $this->getScores($request, $melody);
+		
+		if (!empty($melody) && $owner == $user) {
+			return $this->render('@App/Melody/stats_melody.html.twig', array(
+						'melody' => $melody,
+						'pagination_likes' => $likes,
+						'pagination_scores' => $scores
+			));
+		} else {
+			return $this->redirectToRoute('app_homepage');
+		}
+	}
+	
+	public function getLikes($request, $id = null) {
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+
+		$melody_repo = $em->getRepository('BackendBundle:Melody');
+		$like_repo = $em->getRepository('BackendBundle:Like');
+		$melody = $melody_repo->find($id);
+		$liked_melody = $melody->getId();
+
+		$dql = "SELECT l from BackendBundle:Like l WHERE l.melody = $liked_melody ORDER BY l.id DESC";
+		$query = $em->createQuery($dql);
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+				$query, $request->query->getInt('page', 1), 5
+		);
+
+		return $pagination;
+	}
+	
+	public function getScores($request, $id = null) {
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+
+		$melody_repo = $em->getRepository('BackendBundle:Melody');
+		$like_repo = $em->getRepository('BackendBundle:Score');
+		$melody = $melody_repo->find($id);
+		$scored_melody = $melody->getId();
+
+		$dql = "SELECT s from BackendBundle:Score s WHERE s.melody = $scored_melody ORDER BY s.id DESC";
+		$query = $em->createQuery($dql);
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+				$query, $request->query->getInt('page', 1), 5
+		);
+
+		return $pagination;
 	}
 
 }

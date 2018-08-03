@@ -65,7 +65,13 @@
 
 			<div class="col-12 float-left" id="new-melody">
 				<hr/>
-				<h2 class="header-box-2">Crear melodía</h2>
+				<a type="button" class="btn btn-primary btn-lg btn-block" href="{{path("music")}}">
+					<i class="fa fa-music"></i>
+					&nbsp;
+					Crear melodía
+				</a>
+				<!--<button type="button" class="btn btn-primary btn-lg">Large button</button>
+				<h2 class="header-box-2">Crear melodía</h2>-->
 				{{form_start(form, {action: '', 'method': 'POST'})}}
 				{{form_end(form)}}
 				<hr/>
@@ -88,7 +94,7 @@
 								<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
 									{{melody.user.name}} {{melody.user.surname}}
 								</a>
-								-
+								<i class="fa fa-caret-right"></i>
 								{{melody.user.username}}
 								<br/>
 								<span class="melody-date">
@@ -106,6 +112,9 @@
 									<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
 										<i  class="fa fa-trash" aria-hidden="true"></i>
 									</button>
+									<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
+										<i  class="fa fa-eye" aria-hidden="true"></i>
+									</a>
 								{% endif %}
 								<a data-id="{{melody.id}}" class="btn btn-info btn-assesment" href="{{ path('see_melody', {'id': melody.id}) }}">
 									<i  class="fa fa-comment" aria-hidden="true"></i>
@@ -115,7 +124,7 @@
 										{% if app.user|liked(melody) == true %}
 											d-none
 										{% endif %}
-										btn btn-outline-danger btn-like
+										btn btn-secondary btn-like
 										">
 									<i  class="fa fa-heart" aria-hidden="true"></i>
 								</button>

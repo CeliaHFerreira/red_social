@@ -22,16 +22,16 @@ class ScoreExtension extends \Twig_Extension{
 	}
 	
 	public function scoredFilter($user, $melody){
-		$scored_repo = $this->doctrine->getRepository('BackendBundle:Like');
-		$melody_liked = $like_repo->findOneBy(array(
+		$scored_repo = $this->doctrine->getRepository('BackendBundle:Score');
+		$melody_scored = $scored_repo->findOneBy(array(
 			"user" => $user,
 			"melody" => $melody
 		));
 		
-		if(!empty($melody_liked) && is_object($melody_liked)){
-			$result = true;
-		}else{
+		if(!empty($melody_scored) && is_object($melody_scored)){
 			$result = false;
+		}else{
+			$result = true;
 		}
 		
 		return $result;

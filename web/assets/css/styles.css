@@ -124,7 +124,7 @@ body{
 }
 
 
-.ec-stars-wrapper {
+.ec-stars {
 	/* Espacio entre los inline-block (los hijos, los `a`) 
 	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
 	font-size: 0;
@@ -134,7 +134,7 @@ body{
 		también se esté haciendo hover a alguna estrella */
 	display: inline-block;
 }
-.ec-stars-wrapper a {
+.ec-stars a {
 	text-decoration: none;
 	display: inline-block;
 	/* Volver a dar tamaño al texto */
@@ -144,13 +144,13 @@ body{
 	color: #888;
 }
 
-.ec-stars-wrapper:hover a {
+.ec-stars:hover a {
 	color: rgb(39, 130, 228);
 }
 /*
  * El selector de hijo, es necesario para aumentar la especifidad
  */
-.ec-stars-wrapper > a:hover ~ a {
+.ec-stars > a:hover ~ a {
 	color: #888;
 }
 
@@ -191,8 +191,8 @@ body{
 .melody-item .avatar{
 	background: #ccc;
 	border-radius: 500px;
-	width: 75px;
-	height: 75px;
+	width: 80px;
+	height: 80px;
 	overflow: hidden;
 	float: left;
 }
@@ -260,6 +260,23 @@ body{
 	margin-top: 1%;
 }
 
+.user-item .avatar-second,
+.melody-item .avatar-second{
+	background: #ccc;
+	border-radius: 500px;
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
+	float: left;
+}
+
+.user-item .avatar-second img,
+.melody-item .avatar-second img,
+.melody-midi{
+	height: 100%;
+	text-align: center;
+}
+
 
 /***********
  * PROFILE *
@@ -311,7 +328,7 @@ body{
 
 .profile-box #profile-stats{
 	margin-top: 5%;
-	padding: 2%;
+	padding-left: 3%;
 	border-radius: 10px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
@@ -323,7 +340,7 @@ body{
 .profile-box #profile-stats .following-statistics{
 	font-size: 16px;
 	float: left;
-	padding: 5%;
+	padding: 3%;
 }
 
 .profile-box #profile-stats a{
