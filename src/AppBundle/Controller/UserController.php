@@ -124,7 +124,13 @@ class UserController extends Controller {
 				$password = $encoder->encodePassword($form->get("password")->getData(), $user->getSalt());
 
 				$user->setPassword($password);
-				$user->setRole("ROLE_USER");
+				if(($form->get("role")->getData()) == "true"){
+					$user->setRole("ROLE_COMPOSER");
+				}
+				else{
+					$user->setRole("ROLE_USER");
+				}
+				
 				$user->setImage(null);
 				$user->setActive($clave);
 				//volcamos en doctrine todos los datos para que persistan y se puedan grabar en la db

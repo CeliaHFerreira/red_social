@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 /**
  * Description of RegisterType
@@ -56,6 +56,12 @@ class RegisterType extends AbstractType {
 					'attr' => array(
 						'class' => 'form-password form-control'
 					)
+				))
+				->add('role', CheckboxType::class, array(
+					'label' => 'Marcar si desea tener opciones de composición  ',
+					'value' => true,
+					'mapped' => false,
+					'required' => false
 				))
 				->add('Registrarse', SubmitType::class, array(
 					"attr" => array(

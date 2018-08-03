@@ -30,19 +30,11 @@ class MelodyType extends AbstractType {
 					)
 				))
 				->add('melody', FileType::class, array(
-					'label' => 'Melodía',
+					'label' => 'Mifi File (.mid)',
 					'required' => false,
 					'data_class' => null,
 					'attr' => array(
 						'class' => 'form-control'
-					)
-				))
-				->add('image', FileType::class, array(
-					'label' => 'Foto',
-					'required' => false,
-					'data_class' => null,
-					'attr' => array(
-						'class' => 'form-image form-control'
 					)
 				))
 				->add('Crear', SubmitType::class, array(

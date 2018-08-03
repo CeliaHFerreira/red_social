@@ -62,20 +62,21 @@
 					</span>
 				</a>
 			</div>
-
-			<div class="col-12 float-left" id="new-melody">
-				<hr/>
-				<a type="button" class="btn btn-primary btn-lg btn-block" href="{{path("music")}}">
-					<i class="fa fa-music"></i>
-					&nbsp;
-					Crear melodía
-				</a>
-				<!--<button type="button" class="btn btn-primary btn-lg">Large button</button>
-				<h2 class="header-box-2">Crear melodía</h2>-->
-				{{form_start(form, {action: '', 'method': 'POST'})}}
-				{{form_end(form)}}
-				<hr/>
-			</div>
+			{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+				<div class="col-12 float-left" id="new-melody">
+					<hr/>
+					<a type="button" class="btn btn-primary btn-lg btn-block" href="{{path("music")}}">
+						<i class="fa fa-music"></i>
+						&nbsp;
+						Crear melodía
+					</a>
+					<!--<button type="button" class="btn btn-primary btn-lg">Large button</button>
+					<h2 class="header-box-2">Crear melodía</h2>-->
+					{{form_start(form, {action: '', 'method': 'POST'})}}
+					{{form_end(form)}}
+					<hr/>
+				</div>
+			{% endif %}
 		</div>
 		<div id="timeline" class="col-lg-7 default-box float-left">
 			<h1 class="header-box">Timeline</h1>
@@ -112,9 +113,11 @@
 									<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
 										<i  class="fa fa-trash" aria-hidden="true"></i>
 									</button>
-									<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
-										<i  class="fa fa-eye" aria-hidden="true"></i>
-									</a>
+									{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+										<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
+											<i  class="fa fa-eye" aria-hidden="true"></i>
+										</a>
+									{% endif %}
 								{% endif %}
 								<a data-id="{{melody.id}}" class="btn btn-info btn-assesment" href="{{ path('see_melody', {'id': melody.id}) }}">
 									<i  class="fa fa-comment" aria-hidden="true"></i>
