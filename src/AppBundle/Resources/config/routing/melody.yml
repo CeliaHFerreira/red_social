@@ -9,6 +9,10 @@ remove_melody:
 see_melody:
     path: /melody/{id}
     defaults : { _controller: AppBundle:Melody:commentMelody, id: null }
+
+stats_melody:
+    path: /stats/{id}
+    defaults : { _controller: AppBundle:Melody:statsMelody, id: null }
     
 delete_assest:
     path: /delete_assest/{id}
@@ -25,7 +29,11 @@ like_melody:
 unlike_melody:
     path: /unlike/{id}
     defaults: { _controller: AppBundle:Melody:unlike, id:null }
-    
+
+user_likes:
+    path: /likes/{username}
+    defaults: { _controller: AppBundle:Melody:liked, username:null }
+   
 score_melody:
     path: /score/{id}/{value}
     defaults: { _controller: AppBundle:Melody:score, id:null, value:null }

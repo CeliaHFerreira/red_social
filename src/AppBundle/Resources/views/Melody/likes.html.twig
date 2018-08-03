@@ -3,7 +3,6 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('assets/js/custom/profile.js')}}"></script>
-	<script src="{{ asset('assets/js/custom/bootbox.min.js')}}"></script>
 {% endblock %}
 
 {% block content %}
@@ -83,9 +82,13 @@
 			<div class="clearfix"></div>
 		</div>
 
+
 	<div class="col-lg-10 default-box profile-box">
+		<h2>Me gusta</h2>
+		<hr/>
 		<div id="user-melodies">
-			{% for melody in pagination %}
+			{% for like in pagination %}
+				{% set melody = like.melody%}
 				<div class="col-lg-12 melody-item">
 					<div class="avatar">
 						{% if melody.user.image == null %}
@@ -148,4 +151,11 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
+
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+</div>
+</div>
+{% endblock%}
+

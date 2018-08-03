@@ -22,8 +22,8 @@ class MelodyType extends AbstractType {
 	 * {@inheritdoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder->add('name', TextareaType::class, array(
-					'label' => 'Nombre',
+		$builder->add('name', TextType::class, array(
+					'label' => 'Título',
 					'required' => "required",
 					'attr' => array(
 						'class' => 'form-control'
@@ -45,7 +45,7 @@ class MelodyType extends AbstractType {
 						'class' => 'form-image form-control'
 					)
 				))
-				->add('Enviar', SubmitType::class, array(
+				->add('Crear', SubmitType::class, array(
 					"attr" => array(
 						"class" => "btn btn-success"
 					)

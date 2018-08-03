@@ -1,0 +1,118 @@
+{% extends "@App/Layouts/layout_base.html.twig" %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('assets/js/custom/bootbox.min.js')}}"></script>
+	<script src="{{ asset('assets/js/custom/melody.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="default-box col-lg-6">
+		<div class="melody-item">
+			<div class="avatar">
+				{% if melody.user.image == null %}
+					<img src="{{( asset ('assets/images/default.png'))}}"/>
+				{% else %}
+					<img src="{{( asset ('uploads/users/'~melody.user.image))}}"/>
+				{% endif%}
+			</div>
+			<div class="melody-content">
+				<p>
+					<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
+						{{melody.user.name}} {{melody.user.surname}}
+					</a>
+					<i class="fa fa-caret-right"></i>
+					{{melody.user.username}}
+					<br/>
+					<span class="melody-date">
+						{{melody.creationDate|time}}
+					</span>
+				</p>
+
+				<p>{{melody.name}}</p>
+				<div><audio id="melody-midi" controls preload="metadata">
+						<source src="{{( asset ('assets/images/funk.mid'))}}" type="audio/mp3">
+						Your browser does not support the audio element.
+					</audio>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="default-box col-lg-6">
+		<h2>Estadísticas</h2>
+		<p>Solo tú puedes ver esta página. Los me gusta son visibles en los usuarios. Las valoraciones solo están disponibles para ti.</p>
+		<br/>
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active show" data-toggle="tab" href="#home">Me gusta</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#profile">Valoraciones</a>
+			</li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade active show" id="home">
+				<br/>
+				<p>Total: {{ pagination_likes.getTotalItemCount }}</p>
+				<br/>
+				{% for like in pagination_likes %}
+					<div class="melody-item">
+						<div class="avatar-second">
+							{% if like.user.image == null %}
+								<img src="{{( asset ('assets/images/default.png'))}}"/>
+							{% else %}
+								<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
+							{% endif%}
+						</div>
+						<div class="melody-content">
+							<p>
+								<a class="melody-name-link" href="{{ path('user_profile', {'username': like.user.username}) }}">
+									{{like.user.name}} {{like.user.surname}}
+								</a>
+								<i class="fa fa-caret-right"></i>
+								{{like.user.username}}
+								<br/>
+							</p>
+
+						</div>
+						<br/>
+
+					</div>
+				{% endfor %}
+			</div>
+			<div class="tab-pane fade" id="profile">
+				<br/>
+				<p>Total: {{ pagination_scores.getTotalItemCount }}</p>
+				<br/>
+				{% for score in pagination_scores %}
+					<div class="melody-item">
+						<div class="avatar-second">
+							{% if score.user.image == null %}
+								<img src="{{( asset ('assets/images/default.png'))}}"/>
+							{% else %}
+								<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
+							{% endif%}
+						</div>
+						<div class="melody-content">
+							<p>
+								<a class="melody-name-link" href="{{ path('user_profile', {'username': score.user.username}) }}">
+									{{score.user.name}} {{score.user.surname}}
+								</a> <i class="fa fa-chevron-right"></i> {{score.score}}
+								<br/>
+							</p>
+
+						</div>
+						<br/>
+
+					</div>
+				{% endfor %}
+				<div class="navigation">
+					{{ knp_pagination_render(pagination_scores) }}
+				</div>
+				<div class="navigation-2">
+					{{ knp_pagination_render(pagination_likes) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

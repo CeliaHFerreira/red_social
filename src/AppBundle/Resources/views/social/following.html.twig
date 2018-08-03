@@ -4,89 +4,165 @@
 	<script src="{{ asset('assets/js/custom/users.js')}}"></script>
 {% endblock %}
 {% block content %}
-	<div class="col-lg-10 default-box">
-		{% if type == 'following' %}
-			<h1 class="header-box">Siguiendo</h1>
-		{% else %}
-			<h1 class="header-box">Seguidores</h1>
-		{% endif %}
-		<div class="count">
-			{#<span class="label label-primary">
-				Usuarios Totales: {{ pagination.getTotalItemCount }}
-			</span>#}
-			<div class="box-content users-box">
-				{% for follow in pagination %}
-					{% if type == 'following' %}
-						{% set user = follow.followed %}
-					{% else %}
-						{% set user = follow.user %}
-					{% endif %}
-
-
-					<div class="col-lg-12 user-item">
-						<div class="avatar">
-							{% if user.image == null %}
-								<img src="{{( asset ('assets/images/default.png'))}}"/>
-							{% else %}
-								<img src="{{( asset ('uploads/users/'~user.image))}}"/>
-							{% endif%}
-						</div>
-						<div class="user-item-content">
-							<p>
-								<a class="user-link" href="{{ path('user_profile', {'username': user.username}) }}">
-									{{user.name}} {{user.surname}} 
-								</a>
-								- {{user.username}}
-							</p>
-							<p class="col-lg-8">{{user.description}}</p>
-							{% if app.user.id != user.id %}
-								<div class="float-right buttons-following">
-									<button class="btn btn-sm btn-info btn-follow
-											{% if app.user|following(user) == true%}
-												d-none
-											{% endif %}" 
-											data-followed="{{user.id}}">
-										<i class="fa fa-user-plus" aria-hidden="true"></i>
-										Añadir
-									</button>
-									<button class="btn btn-sm btn-danger btn-unfollow
-											{% if app.user|following(user) == false%}
-												d-none										
-											{% endif %}" 
-											data-followed="{{user.id}}">
-										<i class="fa fa-user-times" aria-hidden="true"></i>
-										Eliminar
-									</button>
-								</div>
-							{% endif %}
-						</div>
-						<div class="clearfix"></div>
-						<hr/>
-					</div>
-				{% endfor %}
+	<div class="col-lg-10 default-box profile-box">
+		<div class="user-profile-first col-lg-3">
+			<div class="avatar">
+				{% if profile_user.image == null %}
+					<img src="{{( asset ('assets/images/default.png'))}}"/>
+				{% else %}
+					<img src="{{( asset ('uploads/users/'~profile_user.image))}}"/>
+				{% endif%}
 			</div>
+		</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-			{# Esto no va, cambiar por paginacion doctrine o buscar implementacion para bootstrap 4 #}
-
-			{% if pagination.getTotalItemCount > 1 %}
-				<ul class="pagination">
-					<a class="page-link" href="#">
-						{{ knp_pagination_render(pagination) }}
+		<div class="user-profile-second col-lg-4">
+			<div class="name-surname-username">
+				<h2>{{profile_user.name}} {{profile_user.surname}}</h2>
+				<div class="clearfix"></div>
+				<span class="username">
+					{{profile_user.username}}
+				</span>
+				{% if app.user.id != profile_user.id %}
+					<div class="buttons-following">
+						<button class="btn btn-sm btn-info btn-follow
+								{% if app.user|following(profile_user) == true%}
+									d-none
+								{% endif %}" 
+								data-followed="{{profile_user.id}}">
+							<i class="fa fa-user-plus" aria-hidden="true"></i>
+							Seguir
+						</button>
+						<button class="btn btn-sm btn-danger btn-unfollow
+								{% if app.user|following(profile_user) == false%}
+									d-none										
+								{% endif %}" 
+								data-followed="{{profile_user.id}}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							Siguiendo
+						</button>
+						{% if profile_user|following(app.user) == true %}
+							<button class="btn btn-sm btn-info disabled">
+								Te sigue
+							</button>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+			<div class="description">
+				{{profile_user.description}}
+			</div>
+		</div>
+		<div class="user-profile-third col-lg-5"
+			 <div id="profile-stats">
+				{% set user_statistics = profile_user|user_statistics %}
+				<ul class="following-statistics">
+					<a href="{{ path('following_users', {'username': profile_user.username}) }}">
+						<span class="num-stat">{{user_statistics.following}}</span> Siguiendo
+					</a>
+					&nbsp;
+					&nbsp;
+					<a href="{{ path('followed_users', {'username': profile_user.username}) }}">
+						<span class="num-stat">{{user_statistics.followers}}</span> Seguidores
+					</a>
+					&nbsp;
+					&nbsp;
+					<a href="{{ path('user_likes', {'username': profile_user.username}) }}">
+						<span class="num-stat">{{user_statistics.likes}}</span> Me gusta
+					</a>
+					&nbsp;
+					&nbsp;
+					<a href="{{ path('user_profile', {'username': profile_user.username}) }}">
+						<span class="num-stat">{{user_statistics.melodies}}</span> Melodías
 					</a>
 				</ul>
-			{% endif %}
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
 		</div>
-	</div>
-{% endblock %}
+
+		<div class="col-lg-10 default-box">
+			{% if type == 'following' %}
+				<h1 class="header-box">Siguiendo</h1>
+			{% else %}
+				<h1 class="header-box">Seguidores</h1>
+			{% endif %}
+			<div class="count">
+				{#<span class="label label-primary">
+					Usuarios Totales: {{ pagination.getTotalItemCount }}
+				</span>#}
+				<div class="box-content users-box">
+					{% for follow in pagination %}
+						{% if type == 'following' %}
+							{% set user = follow.followed %}
+						{% else %}
+							{% set user = follow.user %}
+						{% endif %}
+
+
+						<div class="col-lg-12 user-item">
+							<div class="avatar">
+								{% if user.image == null %}
+									<img src="{{( asset ('assets/images/default.png'))}}"/>
+								{% else %}
+									<img src="{{( asset ('uploads/users/'~user.image))}}"/>
+								{% endif%}
+							</div>
+							<div class="user-item-content">
+								<p>
+									<a class="user-link" href="{{ path('user_profile', {'username': user.username}) }}">
+										{{user.name}} {{user.surname}} 
+									</a>
+									- {{user.username}}
+								</p>
+								<p class="col-lg-8">{{user.description}}</p>
+								{% if app.user.id != user.id %}
+									<div class="float-right buttons-following">
+										<button class="btn btn-sm btn-info btn-follow
+												{% if app.user|following(user) == true%}
+													d-none
+												{% endif %}" 
+												data-followed="{{user.id}}">
+											<i class="fa fa-user-plus" aria-hidden="true"></i>
+											Añadir
+										</button>
+										<button class="btn btn-sm btn-danger btn-unfollow
+												{% if app.user|following(user) == false%}
+													d-none										
+												{% endif %}" 
+												data-followed="{{user.id}}">
+											<i class="fa fa-user-times" aria-hidden="true"></i>
+											Eliminar
+										</button>
+									</div>
+								{% endif %}
+							</div>
+							<div class="clearfix"></div>
+							<hr/>
+						</div>
+					{% endfor %}
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				{# Esto no va, cambiar por paginacion doctrine o buscar implementacion para bootstrap 4 #}
+
+				{% if pagination.getTotalItemCount > 1 %}
+					<ul class="pagination">
+						<a class="page-link" href="#">
+							{{ knp_pagination_render(pagination) }}
+						</a>
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	{% endblock %}

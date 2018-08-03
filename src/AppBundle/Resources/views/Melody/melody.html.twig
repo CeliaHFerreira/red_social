@@ -21,7 +21,7 @@
 					<a class="melody-name-link" href="{{ path('user_profile', {'username': melody.user.username}) }}">
 						{{melody.user.name}} {{melody.user.surname}}
 					</a>
-					-
+					<i class="fa fa-caret-right"></i>
 					{{melody.user.username}}
 					<br/>
 					<span class="melody-date">
@@ -40,13 +40,16 @@
 						<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">
 							<i  class="fa fa-trash" aria-hidden="true"></i>
 						</button>
+						<a data-id="{{melody.id}}" class="btn btn-primary btn-stats" href="{{ path('stats_melody', {'id': melody.id}) }}">
+							<i  class="fa fa-eye" aria-hidden="true"></i>
+						</a>
 					{% endif %}
 					<button data-id="{{melody.id}}" 
 							class="
 							{% if app.user|liked(melody) == true %}
 								d-none
 							{% endif %}
-							btn btn-outline-danger btn-like
+							btn btn-secondary btn-like
 							">
 						<i  class="fa fa-heart" aria-hidden="true"></i>
 					</button>
@@ -60,49 +63,70 @@
 						<i  class="fa fa-heart" aria-hidden="true"></i>
 					</button>
 				</div>
-				<div class="ec-stars-wrapper">
-					<a href="#" class="a-star" data-id="{{melody.id}}" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-					<a href="#" class="a-star" data-id="{{melody.id}}" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-					<a href="#" class="a-star" data-id="{{melody.id}}" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-					<a href="#" class="a-star" data-id="{{melody.id}}" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-					<a href="#" class="a-star" data-id="{{melody.id}}" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+				<br/>
+				<div class="scores">
+					<div class="ec-stars
+						 {% if app.user|scored(melody) == false %}
+							 d-none
+						 {% endif %}">
+						<button type="button" class="btn btn-warning a-star" data-id="{{melody.id}}" data-value="1" title="Votar con 1 estrellas">&#9733;</button>
+						<button type="button" class="btn btn-warning a-star" data-id="{{melody.id}}" data-value="2" title="Votar con 2 estrellas">&#9733;</button>
+						<button type="button" class="btn btn-warning a-star" data-id="{{melody.id}}" data-value="3" title="Votar con 3 estrellas">&#9733;</button>
+						<button type="button" class="btn btn-warning a-star" data-id="{{melody.id}}" data-value="4" title="Votar con 4 estrellas">&#9733;</button>
+						<button type="button" class="btn btn-warning a-star" data-id="{{melody.id}}" data-value="5" title="Votar con 5 estrellas">&#9733;</button>
+					</div>
+
+					<button type="button" class="
+							{% if app.user|scored(melody) == true %}
+								d-none
+							{% endif %}
+							ec-scored
+							btn btn-success disabled">¡Ya has valorado!
+					</button>
+
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="default-box col-lg-8">
-
 		<br/>
-		{% for comment in pagination %}
-			<div class="melody-item">
-				<div class="avatar">
-					{% if comment.user.image == null %}
-						<img src="{{( asset ('assets/images/default.png'))}}"/>
-					{% else %}
-						<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
-					{% endif%}
-				</div>
-				<div class="melody-content">
-					<p>
-						<a class="melody-name-link" href="{{ path('user_profile', {'username': comment.user.username}) }}">
-							{{comment.user.name}} {{comment.user.surname}}
-						</a>
-						-
-						{{comment.user.username}}
-						{% if(comment.user.id is defined) and (comment.user.id == app.user.id) %}
-							<button data-id="{{comment.id}}" class="btn btn-sm btn-danger btn-delete-comment float-right">
-								<i  class="fa fa-times" aria-hidden="true"></i>
-							</button>
-						{% endif %}
-						<br/>
-					</p>
-					<p>{{comment.text}}</p>
+		<div id="user-melodies">
+			{% for comment in pagination %}
+				<div class="melody-item">
+					<div class="avatar-second">
+						{% if comment.user.image == null %}
+							<img src="{{( asset ('assets/images/default.png'))}}"/>
+						{% else %}
+							<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
+						{% endif%}
+					</div>
+					<div class="melody-content">
+						<p>
+							<a class="melody-name-link" href="{{ path('user_profile', {'username': comment.user.username}) }}">
+								{{comment.user.name}} {{comment.user.surname}}
+							</a>
+							<i class="fa fa-caret-right"></i>
+							{{comment.user.username}}
+							{% if(comment.user.id is defined) and (comment.user.id == app.user.id) %}
+								<button data-id="{{comment.id}}" class="btn btn-sm btn-danger btn-delete-comment float-right">
+									<i  class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							{% endif %}
+							<br/>
+						</p>
+						<p>{{comment.text}}</p>
+
+					</div>
+					<div class="clearfix"></div>
+					<hr/>
 
 				</div>
-				<hr/>
 
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
+		<div class="navigation">
+			{{ knp_pagination_render(pagination) }}
+		</div>
 		<div class="comment-box">
 			{{form(form)}}
 		</div>

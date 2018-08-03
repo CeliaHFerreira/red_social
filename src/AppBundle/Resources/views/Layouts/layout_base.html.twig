@@ -34,6 +34,7 @@
 					&nbsp;
 					MeloDJ
 				</a>
+					&nbsp;
 				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -66,6 +67,7 @@
 								</a>
 							</li>
 							&nbsp;
+							&nbsp;
 							<li>
 								<form action="{{path("users_search")}}" class="form-inline my-2 my-lg-0">
 									<input class="form-control mr-sm-2" placeholder="Buscar" type="text" name="search">
@@ -78,6 +80,13 @@
 						{% endif %}
 					</ul>
 					{% if app.user != null %}
+						<ul class="nav navbar-nav ml-auto">
+							<li type="button" class="btn btn-primary">
+								<a class="nav-link" href="{{path("music")}}">
+									<i class="fa fa-music"></i>
+								</a>
+							</li>
+						</ul>
 						<ul class="nav navbar-nav ml-auto">
 							<li class="nav-item">
 								<a class="nav-link" href="{{path("notifications_page")}}">
@@ -93,6 +102,7 @@
 									<span class="alert alert-danger label-notifications-msg d-none"></span>
 								</a>
 							</li>
+							&nbsp;
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 									<div class="avatar">
