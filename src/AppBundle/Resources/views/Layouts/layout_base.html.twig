@@ -17,6 +17,7 @@
 
 		{% block javascripts %} 
 			<!-- javascripts -->
+			<script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
 			<script type="text/javascript">
 				var URL = "{{ app.request.getSchemeAndHttpHost() }}/red_social/web/app_dev.php";
 			</script>
@@ -101,8 +102,7 @@
 							<li class="nav-item">
 								<a class="nav-link" href="{{path("notifications_page")}}">
 									<i class="fa fa-bell"></i>
-
-
+									Notificaciones
 									<span class="alert alert-danger label-notifications"></span>
 								</a>
 							</li>

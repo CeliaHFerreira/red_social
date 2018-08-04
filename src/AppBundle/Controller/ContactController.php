@@ -35,7 +35,7 @@ class ContactController extends Controller {
 
 			$data = $form->getData();
 
-			dump($data);
+			//dump($data);
 
 			$message = \Swift_Message::newInstance()
 					->setSubject($form->get("subject")->getData())
