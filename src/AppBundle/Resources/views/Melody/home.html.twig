@@ -103,10 +103,14 @@
 								</span>
 							</p>
 							<p>{{melody.name}}</p>
-							<div><audio id="melody-midi" controls preload="metadata">
-									<source src="{{( asset ('assets/images/funk.mid'))}}" type="audio/mid">
-									Your browser does not support the audio element.
-								</audio>
+							<div>
+								{% set midiMelody = ( asset ('uploads/melodies/midis/'~melody.melody)) %}
+								<button class="btn btn-primary" onClick="MIDIjs.play('{{midiMelody}}');">
+									<i class="fa fa-play"></i>
+								</button>
+								<button class="btn btn-danger" onClick="MIDIjs.stop();">
+									<i class="fa fa-stop"></i>
+								</button>
 							</div>
 							<div class="float-right options">
 								{% if(melody.user.id is defined) and (melody.user.id == app.user.id) %}
