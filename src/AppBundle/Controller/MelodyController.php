@@ -332,6 +332,7 @@ class MelodyController extends Controller {
 	}
 
 	public function musicAction(Request $request) {
+		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 		$melody = new Melody();
 		$form = $this->createForm(MelodyType::class, $melody);
