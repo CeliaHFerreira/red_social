@@ -74,9 +74,16 @@
 					</a>
 					&nbsp;
 					&nbsp;
-					<a href="{{ path('user_profile', {'username': user.username}) }}">
-						<span class="num-stat">{{user_statistics.melodies}}</span> Melodías
-					</a>
+					{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+						<a href="{{ path('user_profile', {'username': user.username}) }}">
+							<span class="num-stat">{{user_statistics.melodies}}</span> Melodías
+						</a>
+					{% elseif (app.user.role == 'ROLE_USER') %}
+						<a href="{{ path('user_profile', {'username': user.username}) }}">
+							<span class="num-stat"><i class="fa fa-music"></i></span>
+							MeloDJ
+						</a>
+					{% endif %}
 				</ul>
 				<div class="clearfix"></div>
 			</div>
