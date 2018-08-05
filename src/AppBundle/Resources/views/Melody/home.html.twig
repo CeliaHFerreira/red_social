@@ -51,17 +51,29 @@
 					</span>
 				</a>
 			</div>
-
-			<div class="following-statistics">
-				<a href="{{ path('user_profile', {'username': app.user.username}) }}">
-					<span class="label-stat">
-						Melodías
-					</span>
-					<span class="num-stat">
-						{{user_statistics.melodies}}
-					</span>
-				</a>
-			</div>
+			{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
+				<div class="following-statistics">
+					<a href="{{ path('user_profile', {'username': app.user.username}) }}">
+						<span class="label-stat">
+							Melodías
+						</span>
+						<span class="num-stat">
+							{{user_statistics.melodies}}
+						</span>
+					</a>
+				</div>
+			{% elseif (app.user.role == 'ROLE_USER') %}
+				<div class="following-statistics">
+					<a href="{{ path('user_profile', {'username': app.user.username}) }}">
+						<span class="label-stat">
+							Me gusta
+						</span>
+						<span class="num-stat">
+							{{user_statistics.likes}}
+						</span>
+					</a>
+				</div>
+			{% endif %}
 			{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
 				<div class="col-12 float-left" id="new-melody">
 					<hr/>
