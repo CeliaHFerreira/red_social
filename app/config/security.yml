@@ -41,7 +41,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/forget_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/key_password, roles: [ROLE_USER, ROLE_ADMIN, ROLE_COMPOSER] }
+        - { path: ^/key_password, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/user_data, roles: [ROLE_USER, ROLE_ADMIN, ROLE_COMPOSER] }
         - { path: ^/edit_user_data, roles: [ROLE_USER, ROLE_ADMIN, ROLE_COMPOSER] }
         - { path: ^/sendKey, roles: [ROLE_USER, ROLE_ADMIN, ROLE_COMPOSER] }

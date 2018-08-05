@@ -1,43 +1,52 @@
-<html>
-	<head>
-		<script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.1.1"></script>
+{% extends "@App/Layouts/layout_base.html.twig" %}
 
-		<link href="{{ asset('assets/css/music.css')}}" type = "text/css" rel="stylesheet" />
-	</head>
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('assets/css/music.css')}}" type = "text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.1.1"></script>
 
-	<body><center><div id='content'>
-			<h1>Multitrack Chords</h1>
-			<div id='status'>Loading model (25 MB)...</div>
-			<div id='settings'>
-				<div id='style1'>
-					<br><br><br><br><br>
-					<h2>Style 1</h2>
-					<button id='sample1' disabled>Random</button><br><br>
-				</div>
-				<div id='style2'>
-					<br><br><br><br><br>
-					<h2>Style 2</h2>
-					<button id='sample2' disabled>Random</button><br><br>
-				</div>
-				<br><br>
-				<div id='position'>
-					<button id='changeChords' disabled>Change Chords</button><br><br>
-					<div id='chords'>
-						<input id='chord1' type='text' value='Dm' disabled>
-						<input id='chord2' type='text' value='F' disabled>
-						<input id='chord3' type='text' value='Am' disabled>
-						<input id='chord4' type='text' value='G' disabled>
-					</div>
-					<br><br>
-					<input id='alpha' type='range' min='0' max='5' value='0' disabled>
-				</div>
+{% endblock %}
+{% block content %}
+	<div id='content-m'>
+		<h1>Multitrack Chords</h1>
+		<div id='status'>Loading model (25 MB)...</div>
+		<div id='settings'>
+			<div id='style1'>
+				<br><br><br><br><br>
+				<h2>Style 1</h2>
+				<button id='sample1' disabled>Random</button><br><br>
+			</div>
+			<div id='style2'>
+				<br><br><br><br><br>
+				<h2>Style 2</h2>
+				<button id='sample2' disabled>Random</button><br><br>
 			</div>
 			<br><br>
-			<button id='play' disabled>Play</button><br><br>
-			<button id='download' disabled>Save as MIDI</button><br>
+			<div id='position'>
+				<button id='changeChords' disabled>Change Chords</button><br><br>
+				<div id='chords'>
+					<input id='chord1' type='text' value='Dm' disabled>
+					<input id='chord2' type='text' value='F' disabled>
+					<input id='chord3' type='text' value='Am' disabled>
+					<input id='chord4' type='text' value='G' disabled>
+				</div>
+				<br><br>
+				<input id='alpha' type='range' min='0' max='5' value='0' disabled>
+			</div>
 		</div>
-		<p id='fineprint'>Uses samples from <a href='https://www.polyphone-soundfonts.com/en/files/27-instrument-sets/256-sgm-v2-01'>SGM</a> with modifications by <a href="https://sites.google.com/site/soundfonts4u/">John Nebauer</a>.  May work poorly on mobile.
-	</center>
-	<script src="{{ asset('assets/js/custom/prueba.js')}}"></script>
-</body>
-</html>
+		<br><br>
+		<button id='play' disabled>Play</button><br><br>
+		<button id='download' disabled>Save as MIDI</button><br>
+	</div>
+	<p id='fineprint'>Uses samples from <a href='https://www.polyphone-soundfonts.com/en/files/27-instrument-sets/256-sgm-v2-01'>SGM</a> with modifications by <a href="https://sites.google.com/site/soundfonts4u/">John Nebauer</a>.  May work poorly on mobile.
+
+		<script src="{{ asset('assets/js/custom/music.js')}}"></script>
+		
+	<div class="default-box col-lg-4" id="new-melody">
+		{{form_start(form, {action: '', 'method': 'POST'})}}
+					{{form_end(form)}}
+	</div>
+	{% endblock %}

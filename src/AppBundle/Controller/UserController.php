@@ -265,7 +265,9 @@ class UserController extends Controller {
 
 			$user_repo = $em->getRepository("BackendBundle:User");
 			$user = $user_repo->findOneBy(array("email" => $email));
-			dump($user);
+			if (!$user) {
+				return $this->render('@App/User/error_user_forget_password.html.twig');
+			}
 			$user->setChangepassword($clave);
 			$em->persist($user);
 			$flush = $em->flush();
@@ -474,99 +476,6 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * LISTA DE USUARIOS, PAGINACIÓN
-	 */
-//	public function usersAction(Request $request) {
-//		$user = $this->getUser();
-//		if ($user->getActive() != "true") {
-//			return $this->redirect($this->generateUrl('activate'));
-//		}
-//		$em = $this->getDoctrine()->getManager();
-//
-//		$dql = "SELECT u FROM BackendBundle:User u ORDER BY u.id";
-//		$query = $em->createQuery($dql);
-//
-//		$paginator = $this->get('knp_paginator');
-//		$pagination = $paginator->paginate(
-//				$query, $request->query->getInt('page', 1), 5
-//		);
-//
-//		return $this->render('@App/User/users.html.twig', array(
-//					'pagination' => $pagination
-//		));
-//	}
-
-	/**
-	 * BUSCAR USUARIOS
-	 */
-//	public function searchAction(Request $request) {
-//		$user = $this->getUser();
-//		if ($user->getActive() != "true") {
-//			return $this->redirect($this->generateUrl('activate'));
-//		}
-//		$em = $this->getDoctrine()->getManager();
-//
-//		$search = trim($request->query->get("search", null));
-//
-//		if ($search == null) {
-//			return $this->redirect($this->generateUrl('home_melodies'));
-//		}
-//
-//		$dql = "SELECT u FROM BackendBundle:User u "
-//				. " WHERE u.name LIKE :search OR u.surname LIKE :search OR u.username LIKE :search"
-//				. " ORDER BY u.id ASC";
-//		$query = $em->createQuery($dql)->setParameter('search', "%$search%");
-//
-//		$paginator = $this->get('knp_paginator');
-//		$pagination = $paginator->paginate(
-//				$query, $request->query->getInt('page', 1), 5
-//		);
-//
-//		return $this->render('@App/User/users.html.twig', array(
-//					'pagination' => $pagination
-//		));
-//	}
-
-	/**
-	 * VER PERFIL DE USUARIO
-	 */
-//	public function profileAction(Request $request, $username = null) {
-//		$user = $this->getUser();
-//		if ($user->getActive() != "true") {
-//			return $this->redirect($this->generateUrl('activate'));
-//		}
-//
-//		$em = $this->getDoctrine()->getManager();
-//
-//		if ($username != null) {
-//			$user_repo = $em->getRepository('BackendBundle:User');
-//			$user = $user_repo->findOneBy(array(
-//				"username" => $username
-//			));
-//		} else {
-//			$user = $this->getUser();
-//		}
-//
-//		if (empty($user) || !is_object($user)) {
-//			return $this->redirect($this->generateUrl('app_homepage'));
-//		}
-//
-//		$user_id = $user->getId();
-//		$dql = "SELECT m FROM BackendBundle:Melody m WHERE m.user = $user_id ORDER BY m.id DESC";
-//		$query = $em->createQuery($dql);
-//
-//		$paginator = $this->get('knp_paginator');
-//		$melodies = $paginator->paginate(
-//				$query, $request->query->getInt('page', 1), 5
-//		);
-//
-//		return $this->render('@App/User/profile.html.twig', array(
-//					'user' => $user,
-//					'pagination' => $melodies
-//		));
-//	}
-
-	/**
 	 * BORRAR CUENTA
 	 */
 	public function removeAccountAction(Request $request) {
@@ -635,7 +544,7 @@ class UserController extends Controller {
 //			$this->addFlash(
 //					'notice', 'Se ha eliminado la cuenta de usuario'
 //			);
-//			return $this->render('@App/red_social/web/app_dev.php');
+			return $this->render('@App/User/delete_user.html.twig');
 		} else {
 			$status = "cuenta no borrada";
 //			$this->addFlash(
