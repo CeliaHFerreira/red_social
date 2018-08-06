@@ -95,7 +95,7 @@
 		<div id="user-melodies">
 			{% for comment in pagination %}
 				<div class="melody-item">
-					<div class="avatar-second">
+					<div class="avatar">
 						{% if comment.user.image == null %}
 							<img src="{{( asset ('assets/images/default.png'))}}"/>
 						{% else %}

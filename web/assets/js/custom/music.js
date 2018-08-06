@@ -193,14 +193,14 @@ function saveSequence() {
 		else { // Others
 			var myURL = URL || window.webkitURL;
 			const a = document.createElement('a');
-			const url = myURL.createObjectURL(file);
+			const url = webkitURL.createObjectURL(file);
 			a.href = url;
 			a.download = 'prog.mid';
 			document.body.appendChild(a);
 			a.click();
 			setTimeout(() => {
 				document.body.removeChild(a);
-				myURL.revokeObjectURL(url);
+				webkitURL.revokeObjectURL(url);
 			}
 			, 0);
 		}
