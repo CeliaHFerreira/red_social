@@ -57,11 +57,11 @@
 				<br/>
 				{% for like in pagination_likes %}
 					<div class="melody-item">
-						<div class="avatar-second">
+						<div class="avatar">
 							{% if like.user.image == null %}
 								<img src="{{( asset ('assets/images/default.png'))}}"/>
 							{% else %}
-								<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
+								<img src="{{( asset ('uploads/users/'~like.user.image))}}"/>
 							{% endif%}
 						</div>
 						<div class="melody-content">
@@ -86,11 +86,11 @@
 				<br/>
 				{% for score in pagination_scores %}
 					<div class="melody-item">
-						<div class="avatar-second">
+						<div class="avatar">
 							{% if score.user.image == null %}
 								<img src="{{( asset ('assets/images/default.png'))}}"/>
 							{% else %}
-								<img src="{{( asset ('uploads/users/'~comment.user.image))}}"/>
+								<img src="{{( asset ('uploads/users/'~score.user.image))}}"/>
 							{% endif%}
 						</div>
 						<div class="melody-content">

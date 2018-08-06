@@ -50,25 +50,7 @@ class MelodyController extends Controller {
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
 			if ($form->isValid()) {
-				//upload image
-//				$file = $form['image']->getData();
-//
-//				if (!empty($file) && $file != null) {
-//					$ext = $file->guessExtension();
-//
-//					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
-//						$file_name = $user->getId() . time() . "." . $ext;
-//						$file->move("uploads/melodies/images", $file_name);
-//
-//						$melody->setImage($file_name);
-//					} else {
-//						$melody->setImage(null);
-//					}
-//				} else {
-//					$melody->setImage(null);
-//				}
-
-				//upoad document
+				//upoad midi
 				$midi = $form['melody']->getData();
 
 				if (!empty($midi) && $midi != null) {
@@ -79,23 +61,27 @@ class MelodyController extends Controller {
 						$midi->move("uploads/melodies/midis", $file_name);
 
 						$melody->setMelody($file_name);
+
+						$melody->setUser($user);
+						$melody->setCreationDate(new \DateTime("now"));
+
+						$em->persist($melody);
+						$fush = $em->flush();
+
+						if ($fush == null) {
+							$this->addFlash(
+									'notice', 'La melodía se ha creado correctamentee'
+							);
+						} else {
+							$this->addFlash(
+									'error', 'Error al añadir la melodía'
+							);
+						}
 					} else {
-						$melody->setMelody(null);
+						$this->addFlash(
+								'error', 'Error al añadir el midi'
+						);
 					}
-				} else {
-					$melody->setMelody(null);
-				}
-
-				$melody->setUser($user);
-				$melody->setCreationDate(new \DateTime("now"));
-
-				$em->persist($melody);
-				$fush = $em->flush();
-
-				if ($fush == null) {
-					$this->addFlash(
-							'notice', 'La melodía se ha creado correctamentee'
-					);
 				} else {
 					$this->addFlash(
 							'error', 'Error al añadir la melodía'
@@ -252,7 +238,7 @@ class MelodyController extends Controller {
 				);
 			}
 			$comments = $this->getComments($request, $melody);
-			
+
 			return $this->render('@App/Melody/melody.html.twig', array(
 						'melody' => $melody,
 						'form' => $form->createView(),
@@ -356,7 +342,6 @@ class MelodyController extends Controller {
 //				} else {
 //					$melody->setImage(null);
 //				}
-
 				//upoad document
 				$midi = $form['melody']->getData();
 
@@ -469,8 +454,7 @@ class MelodyController extends Controller {
 		}
 		return new Response($status);
 	}
-	
-	
+
 	//Ver Me gustas
 	public function likedAction(Request $request, $username = null) {
 		$em = $this->getDoctrine()->getManager();
@@ -499,9 +483,6 @@ class MelodyController extends Controller {
 					'pagination' => $like
 		));
 	}
-	
-	
-	
 
 	//VALORACION DE MELODIAAAS
 
@@ -517,14 +498,14 @@ class MelodyController extends Controller {
 		$score->setScore($value);
 		$role = $user->getRoles();
 
-		if($role == "ROLE_USER"){
-			$pondered = 35/100;
+		if ($role == "ROLE_USER") {
+			$pondered = 35 / 100;
 			$score->setPonderedScore($value * $pondered);
-		}else if($role == "ROLE_ADMIN"){
-			$pondered = 40/100;
+		} else if ($role == "ROLE_ADMIN") {
+			$pondered = 40 / 100;
 			$score->setPonderedScore($value * $pondered);
-		}else if($role == "ROLE_COMPOSER"){
-			$pondered = 70/100;
+		} else if ($role == "ROLE_COMPOSER") {
+			$pondered = 70 / 100;
 			$score->setPonderedScore($value * $pondered);
 		}
 
@@ -547,15 +528,15 @@ class MelodyController extends Controller {
 			} else {
 				$status = 'No se ha podido puntuar la melodía';
 			}
-		}else{
+		} else {
 			$status = 'La melodía ya estaba puntuada';
 		}
 
 		return new Response($status);
 	}
-	
+
 	//Estadísticas melodía
-	public function statsMelodyAction(Request $request, $id = null){
+	public function statsMelodyAction(Request $request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
 		$melody_repo = $em->getRepository('BackendBundle:Melody');
@@ -564,7 +545,7 @@ class MelodyController extends Controller {
 
 		$likes = $this->getLikes($request, $melody);
 		$scores = $this->getScores($request, $melody);
-		
+
 		if (!empty($melody) && $owner == $user) {
 			return $this->render('@App/Melody/stats_melody.html.twig', array(
 						'melody' => $melody,
@@ -575,7 +556,7 @@ class MelodyController extends Controller {
 			return $this->redirectToRoute('app_homepage');
 		}
 	}
-	
+
 	public function getLikes($request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -594,7 +575,7 @@ class MelodyController extends Controller {
 
 		return $pagination;
 	}
-	
+
 	public function getScores($request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();

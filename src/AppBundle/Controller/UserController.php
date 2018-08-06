@@ -204,6 +204,9 @@ class UserController extends Controller {
 			$email = $form->get("email")->getData();
 			$user_repo = $em->getRepository("BackendBundle:User");
 			$user = $user_repo->findOneBy(array("email" => $email));
+			if (!$user) {
+				return $this->render('@App/User/error_user_forget_password.html.twig');
+			}
 			$clave_cambiar = $user->getChangepassword();
 			$clave_cambiar_introducida = $form->get("changepassword")->getData();
 //			dump($clave_cambiar);
@@ -504,6 +507,14 @@ class UserController extends Controller {
 			$em->remove($follow);
 			$flush = $em->flush();
 		}
+		$assesments_repo = $em->getRepository('BackendBundle:Assesment');
+		$assesments = $assesments_repo->findBy(array(
+			'user' => $id
+		));
+		foreach ($assesments as $assesment) {
+			$em->remove($assesment);
+			$flush = $em->flush();
+		}
 		$likes_repo = $em->getRepository('BackendBundle:Like');
 		$likes = $likes_repo->findBy(array(
 			'user' => $id
@@ -533,6 +544,14 @@ class UserController extends Controller {
 		));
 		foreach ($privateMessagesEmitter as $emitter) {
 			$em->remove($emitter);
+			$flush = $em->flush();
+		}
+		$scores_repo = $em->getRepository('BackendBundle:Score');
+		$scores = $scores_repo->findBy(array(
+			'user' => $id
+		));
+		foreach ($scores as $score) {
+			$em->remove($score);
 			$flush = $em->flush();
 		}
 		

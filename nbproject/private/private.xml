@@ -3,14 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/User/forget_password.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music2.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/home.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/User/delete_user.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/music2.js</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Layouts/layout_base.html.twig</file>
             <file>file:/C:/wamp64/www/red_social/app/config/security.yml</file>
             <file>file:/C:/wamp64/www/red_social/web/assets/css/styles.css</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music2.html.twig</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/MelodyController.php</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/social/profile.html.twig</file>
             <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/music.js</file>
-            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/music2.js</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/UserController.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/User/error_user_forget_password.html.twig</file>
         </group>
     </open-files>
 </project-private>
