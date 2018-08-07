@@ -1,16 +1,12 @@
 {% extends "@App/Layouts/layout_base.html.twig" %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link href="{{ asset('assets/css/music.css')}}" type = "text/css" rel="stylesheet" />
-{% endblock %}
 {% block javascripts %}
 	{{ parent() }}
 	<script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.1.7"></script>
 	<script src='https://cdn.jsdelivr.net/npm/file-saver'></script>
 {% endblock %}
 {% block content %}
-	<div id='content-m'>
+	<div class='music-box col-lg-6'>
 		<div id='message'>Loading model...</div>
 		<div id='chords'>
 			<table><tr>
@@ -21,12 +17,12 @@
 				</tr></table>
 		</div>
 		<br>
-		<input id='play'   type='button'  value='Play'     disabled>
-		<input id='download' type='button'  value='Download' disabled>
+		<input class="btn btn-success" id='play'   type='button'  value='Play'     disabled>
+		<input class="btn btn-success" id='download' type='button'  value='Download' disabled>
 	</div>
 	<script src="{{ asset('assets/js/custom/music.js')}}"></script>
 
-	<div class="default-box col-lg-4" id="new-melody">
+	<div class="default-box col-lg-6" id="new-melody">
 		{{form_start(form, {action: '', 'method': 'POST'})}}
 		{{form_end(form)}}
 	</div>
