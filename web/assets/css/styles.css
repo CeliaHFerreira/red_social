@@ -25,8 +25,46 @@
 /********
  * BODY *
  ********/
+.logo{
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	float: left;
+	margin-right: 12px;
+	margin-top: -8px;
+	text-align: center;
+}
+
+.logo img{
+	height: 100%;
+	text-align: center;
+}
+
+.logo2{
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	float: left;
+	margin-right: 12px;
+	margin-top: -8px;
+	text-align: center;
+}
+
+.logo2 img{
+	height: 100%;
+	text-align: center;
+}
+
 body{
-	background: #eee;
+	background-color: #eee;
+	
+	
+	background-image: url(../images/fondo.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	
 }
 
 /********

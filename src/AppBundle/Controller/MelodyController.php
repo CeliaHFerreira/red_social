@@ -325,24 +325,7 @@ class MelodyController extends Controller {
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
 			if ($form->isValid()) {
-				//upload image
-//				$file = $form['image']->getData();
-//
-//				if (!empty($file) && $file != null) {
-//					$ext = $file->guessExtension();
-//
-//					if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
-//						$file_name = $user->getId() . time() . "." . $ext;
-//						$file->move("uploads/melodies/images", $file_name);
-//
-//						$melody->setImage($file_name);
-//					} else {
-//						$melody->setImage(null);
-//					}
-//				} else {
-//					$melody->setImage(null);
-//				}
-				//upoad document
+				//upoad midi
 				$midi = $form['melody']->getData();
 
 				if (!empty($midi) && $midi != null) {
