@@ -114,6 +114,15 @@
 								</span>
 							</p>
 							<p>{{melody.name}}</p>
+							<div>
+								{% set midiMelody = ( asset ('uploads/melodies/midis/'~melody.melody)) %}
+								<button class="btn btn-primary" onClick="MIDIjs.play('{{midiMelody}}');">
+									<i class="fa fa-play"></i>
+								</button>
+								<button class="btn btn-danger" onClick="MIDIjs.stop();">
+									<i class="fa fa-stop"></i>
+								</button>
+							</div>
 							<div class="float-right profile-options">
 								{% if(melody.user.id is defined) and (melody.user.id == app.user.id) %}
 									<button data-id="{{melody.id}}" class="btn btn-warning btn-delete-melody">

@@ -531,6 +531,13 @@ class UserController extends Controller {
 			$em->remove($notification);
 			$flush = $em->flush();
 		}
+		$notifications_others = $notifitions_repo->findBy(array(
+			'typeId' => $id
+		));
+		foreach ($notifications_others as $notification_other) {
+			$em->remove($notification_other);
+			$flush = $em->flush();
+		}
 		$privateMessages_repo = $em->getRepository('BackendBundle:PrivateMessage');
 		$privateMessagesReceiver = $privateMessages_repo->findBy(array(
 			'receiver' => $id

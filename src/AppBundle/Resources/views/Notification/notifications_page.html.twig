@@ -34,6 +34,12 @@
 								</span>
 								<p class="text-primary float-left"> <a class="user-link" href="{{ path('user_profile', {'username':notificationUser.username}) }}">{{notificationUser.name}} {{notificationUser.surname}}</a> ha comentado una de tus <a class="user-link" href="{{ path('see_melody', {'id':notificationMelody.id}) }}">melodías</a></p>
 							{% endif %}
+							{% if notification.type == "score" %}
+								<span class="badge badge-info float-left not-default">
+									<i  <i class="fa fa-trophy" aria-hidden="true"></i>
+								</span>
+								<p class="text-primary float-left"> <a class="user-link" href="{{ path('user_profile', {'username':notificationUser.username}) }}">{{notificationUser.name}} {{notificationUser.surname}}</a> ha puntuado una de tus <a class="user-link" href="{{ path('see_melody', {'id':notificationMelody.id}) }}">melodías</a></p>
+							{% endif %}
 						</div>
 					</div>
 				{% endfor %}
