@@ -29,7 +29,7 @@ class PrivateMessageController extends Controller {
 	}
 
 	/**
-	 * ENVIAR MENSAJE
+	 * ENVIAR MENSAJE, VER RECIBIDOS Y ENVIADOS
 	 */
 	public function indexAction(Request $request) {
 
@@ -68,9 +68,9 @@ class PrivateMessageController extends Controller {
 				if (!empty($doc) && $doc != null) {
 					$ext = $doc->guessExtension();
 
-					if ($ext == 'pdf' || $ext == 'PDF') {
+					if ($ext == 'mid' || $ext == 'MID') {
 						$file_name = $user->getId() . time() . "." . $ext;
-						$doc->move("uploads/messages/documents", $file_name);
+						$doc->move("uploads/messages/midis", $file_name);
 
 						$private_message->setFile($file_name);
 					} else {
@@ -104,21 +104,14 @@ class PrivateMessageController extends Controller {
 			return $this->redirectToRoute("private_message_index");
 		}
 
-		$private_messages = $this->getPrivateMessages($request);
+		$private_messages_received = $this->getPrivateMessages($request);
+		$private_messages_sended = $this->getPrivateMessages($request, "sended");
 		$this->setReadedMessagesAction($em, $user);
 
 		return $this->render('@App/PrivateMessage/index.html.twig', array(
 					'form' => $form->createView(),
-					'pagination' => $private_messages
-		));
-	}
-
-	//enviar
-	public function sendedAction(Request $request) {
-		$private_messages = $this->getPrivateMessages($request, "sended");
-
-		return $this->render('@App/PrivateMessage/sended.html.twig', array(
-					'pagination' => $private_messages
+					'pagination_receive' => $private_messages_received,
+					'pagination_sended' => $private_messages_sended
 		));
 	}
 
@@ -138,7 +131,7 @@ class PrivateMessageController extends Controller {
 
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-				$query, $request->query->getInt('page', 1), 5
+				$query, $request->query->getInt('page', 1), 50
 		);
 		return $pagination;
 	}

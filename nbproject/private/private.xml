@@ -3,20 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/red_social/src/BackendBundle/Resources/config/doctrine/Notification.orm.yml</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/likes.html.twig</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/NotificationController.php</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/social/following.html.twig</file>
-            <file>file:/C:/wamp64/www/red_social/src/BackendBundle/Entity/Notification.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/PrivateMessageController.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/PrivateMessage/index.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Notification/notifications_page.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/melody.js</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/home.html.twig</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/notifications.js</file>
+            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/profile.js</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Layouts/layout_base.html.twig</file>
             <file>file:/C:/wamp64/www/red_social/web/assets/css/styles.css</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/MelodyController.php</file>
-            <file>file:/C:/wamp64/www/red_social/web/assets/css/music.css</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/music.html.twig</file>
-            <file>file:/C:/wamp64/www/red_social/web/assets/bootstrap/css/bootstrap.min.css</file>
-            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/social/profile.html.twig</file>
-            <file>file:/C:/wamp64/www/red_social/web/assets/js/custom/music.js</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/SocialController.php</file>
             <file>file:/C:/wamp64/www/red_social/src/AppBundle/Controller/UserController.php</file>
+            <file>file:/C:/wamp64/www/red_social/src/AppBundle/Resources/views/Melody/stats_melody.html.twig</file>
         </group>
     </open-files>
 </project-private>

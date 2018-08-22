@@ -553,7 +553,7 @@ class MelodyController extends Controller {
 		$query = $em->createQuery($dql);
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-				$query, $request->query->getInt('page', 1), 5
+				$query, $request->query->getInt('page', 1), 50
 		);
 
 		return $pagination;
@@ -572,7 +572,7 @@ class MelodyController extends Controller {
 		$query = $em->createQuery($dql);
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-				$query, $request->query->getInt('page', 1), 5
+				$query, $request->query->getInt('page', 1), 50
 		);
 
 		return $pagination;
