@@ -71,12 +71,12 @@
 					</a>
 					&nbsp;
 					&nbsp;
-					{% if (app.user.role == 'ROLE_ADMIN') or (app.user.role == 'ROLE_COMPOSER')%}
-						<a href="{{ path('user_profile', {'username': user.username}) }}">
+					{% if (profile_user.role == 'ROLE_ADMIN') or (profile_user.role == 'ROLE_COMPOSER')%}
+						<a href="{{ path('user_profile', {'username': profile_user.username}) }}">
 							<span class="num-stat">{{user_statistics.melodies}}</span> Melodías
 						</a>
-					{% elseif (app.user.role == 'ROLE_USER') %}
-						<a href="{{ path('user_profile', {'username': user.username}) }}">
+					{% elseif (profile_user.role == 'ROLE_USER') %}
+						<a href="{{ path('user_profile', {'username': profile_user.username}) }}">
 							<span class="num-stat"><i class="fa fa-music"></i></span>
 							MeloDJ
 						</a>
