@@ -50,6 +50,8 @@ class Melody
     private $creationDate;
 
     /**
+	 * id user
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $user;

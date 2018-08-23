@@ -281,6 +281,7 @@ class MelodyController extends Controller {
 	 * get comments
 	 * 
 	 * @param Request $request necessary
+	 * @param string $id null in the beggining
 	 * @return pagination necessary for view melody
 	 */
 	public function getComments($request, $id = null) {
@@ -603,6 +604,7 @@ class MelodyController extends Controller {
 	 * get likes
 	 * 
 	 * @param Request $request necessary
+	 * @param string $id null in the beggining
 	 * @return pagination necessary for view stats
 	 */
 	public function getLikes($request, $id = null) {
@@ -628,6 +630,7 @@ class MelodyController extends Controller {
 	 * get comments
 	 * 
 	 * @param Request $request necessary
+	 * @param string $id null in the beggining
 	 * @return pagination necessary for view stats
 	 */
 	public function getScores($request, $id = null) {
