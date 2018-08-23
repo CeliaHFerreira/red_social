@@ -1,9 +1,6 @@
 <?php
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * UsersController, package used to manage users
  */
 
 namespace AppBundle\Controller;
@@ -46,6 +43,9 @@ class UserController extends Controller {
 
 	/**
 	 * LOGIN DE USUARIOS
+	 * 
+	 * @param Request $request necessary
+	 * @return view login
 	 */
 	public function loginAction(Request $request) {
 		//Si el método nos devuelve un objeto nos redirijirá a la home porque el usuario ya está logueado
@@ -71,6 +71,9 @@ class UserController extends Controller {
 
 	/**
 	 * REGISTRO DE USUARIOS
+	 * 
+	 * @param Request $request necessary
+	 * @return view register form
 	 */
 	public function registerAction(Request $request) {
 
@@ -163,7 +166,14 @@ class UserController extends Controller {
 		));
 	}
 
-	//Encontrar nombre de usuario en lista de usuarios
+	/**
+	 * username test
+	 * 
+	 * Encontrar nombre de usuario en lista de usuarios
+	 * 
+	 * @param Request $request necessary
+	 * @return response whether user exists or not
+	 */
 	public function UsernameTestAction(Request $request) {
 		$username = $request->get("username");
 
@@ -184,6 +194,9 @@ class UserController extends Controller {
 
 	/**
 	 * OVLIDO DE CONTRASEÑA
+	 * 
+	 * @param Request $request necessary
+	 * @return view recuperar password
 	 */
 	public function forgetPasswordAction(Request $request) {
 		if (is_object($this->getUser())) {
@@ -246,6 +259,12 @@ class UserController extends Controller {
 		));
 	}
 
+	/**
+	 * enviar clave
+	 * 
+	 * @param Request $request necessary
+	 * @return view key password
+	 */
 	public function keyPasswordAction(Request $request) {
 		if (is_object($this->getUser())) {
 			$user = $this->getUser();
@@ -308,6 +327,9 @@ class UserController extends Controller {
 
 	/**
 	 * VER DATOS USUARIO
+	 * 
+	 * @param Request $request necessary
+	 * @return view user data
 	 */
 	public function seeUserAction(Request $request) {
 		$user = $this->getUser();
@@ -322,6 +344,9 @@ class UserController extends Controller {
 
 	/**
 	 * MODIFICAR DATOS USUARIO
+	 * 
+	 * @param Request $request necessary
+	 * @return view user form
 	 */
 	public function editUserAction(Request $request) {
 		$user = $this->getUser();
@@ -391,6 +416,9 @@ class UserController extends Controller {
 
 	/**
 	 * MODIFICAR CONTRASEÑA USUARIO
+	 * 
+	 * @param Request $request necessary
+	 * @return view edit password
 	 */
 	public function editPasswordAction(Request $request) {
 		$user = $this->getUser();
@@ -445,6 +473,12 @@ class UserController extends Controller {
 		));
 	}
 
+	/**
+	 * enviar clave cambio
+	 * 
+	 * @param Request $request necessary
+	 * @return response with the result
+	 */
 	public function sendKeyAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -480,6 +514,9 @@ class UserController extends Controller {
 
 	/**
 	 * BORRAR CUENTA
+	 * 
+	 * @param Request $request necessary
+	 * @return view edit password
 	 */
 	public function removeAccountAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
@@ -567,22 +604,18 @@ class UserController extends Controller {
 
 		if ($flush == null) {
 			$status = "cuenta borrada";
-//			$this->addFlash(
-//					'notice', 'Se ha eliminado la cuenta de usuario'
-//			);
 			return $this->render('@App/User/delete_user.html.twig');
 		} else {
 			$status = "cuenta no borrada";
-//			$this->addFlash(
-//					'notice', 'No se ha eliminado la cuenta de usuario'
-//			);
-//			return $this->render('home');
 		}
 		return new Response ($status);
 	}
 
 	/**
 	 * GENERACIÓN CLAVE ACTIVACIÓN, CONTRASEÑA
+	 * 
+	 * @param string $long password
+	 * return password key generate
 	 */
 	public function generatePassword($long) {
 		$cadena_base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

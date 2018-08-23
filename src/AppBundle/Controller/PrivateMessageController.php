@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * PrivateMessageController, package used to manage private messages
+ */
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,6 +32,9 @@ class PrivateMessageController extends Controller {
 
 	/**
 	 * ENVIAR MENSAJE, VER RECIBIDOS Y ENVIADOS
+	 * 
+	 * @param Request $request necessary
+	 * @return view private messages
 	 */
 	public function indexAction(Request $request) {
 
@@ -115,7 +120,15 @@ class PrivateMessageController extends Controller {
 		));
 	}
 
-	//mostrar mensajes enviados o recibidos
+	/**
+	 * get melodies
+	 * 
+	 * mostrar mensajes enviados o recibidos
+	 * 
+	 * @param Request $request necessary
+	 * @param string &type null in the beggining
+	 * @return pagination necessary for view private messages
+	 */
 	public function getPrivateMessages($request, $type = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -136,7 +149,11 @@ class PrivateMessageController extends Controller {
 		return $pagination;
 	}
 
-	//Mostrar notificaciones de mensajes
+	/**
+	 * contar mensajes privados no leidos
+	 * 
+	 * @return response number of private messages not readed
+	 */
 	public function notReadedMessagesAction() {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -150,7 +167,13 @@ class PrivateMessageController extends Controller {
 		return new Response($count_not_readed);
 	}
 
-//Marcar mensajes como leídos
+	/**
+	 * marcar mensaje como leido
+	 * 
+	 * @param EntityManage $em necessary
+	 * @param string $user necessary
+	 * @return result private messages readed
+	 */
 	private function setReadedMessagesAction($em, $user) {
 		$private_message_repo = $em->getRepository('BackendBundle:PrivateMessage');
 		$messages = $private_message_repo->findBy(array(

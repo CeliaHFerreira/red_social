@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Following, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,16 +10,22 @@ namespace BackendBundle\Entity;
 class Following
 {
     /**
+	 * id follow
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * id followed
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $followed;
 
     /**
+	 * id user
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $user;

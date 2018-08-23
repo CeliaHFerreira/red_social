@@ -1,4 +1,7 @@
 <?php
+/*
+ * ActivationType, form to activate account
+ */
 
 namespace AppBundle\Form;
 

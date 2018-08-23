@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * EditPasswordType, form to change password
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

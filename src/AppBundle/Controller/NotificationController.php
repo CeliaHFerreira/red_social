@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * NotificationController, package used to manage notifications
+ */
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,7 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Celia
  */
 class NotificationController extends Controller {
-
+	
+	/**
+	 * NOTIFICACIONES
+	 * 
+	 * @param Request $request necessary
+	 * @return view notifications
+	 */
 	public function indexAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
@@ -37,7 +45,12 @@ class NotificationController extends Controller {
 		));
 	}
 
-	//Contar el número de notifiaciones nuevas (sin leer)
+	/**
+	 * contar notificaciones
+	 * 
+	 * Contar el número de notifiaciones nuevas (sin leer)
+	 * @return response number of notifications
+	 */
 	public function countNotificationsAction() {
 		$em = $this->getDoctrine()->getManager();
 

@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * PrivateMessageType, form to send private message
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

@@ -1,4 +1,7 @@
 <?php
+/*
+ * CommentType, form to comment melody
+ */
 
 namespace AppBundle\Form;
 

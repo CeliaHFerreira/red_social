@@ -1,5 +1,8 @@
 <?php
-
+/**
+  * Description for ContactController, package used to manage contact
+  *
+  */
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,6 +20,9 @@ class ContactController extends Controller {
 
 	/**
 	 * FORMULARIO DE CONTACTO
+	 * 
+	 * @param Request $request necessary
+	 * @return view ContactForm
 	 */
 	public function contactAction(Request $request) {
 		$user = $this->getUser();
@@ -55,6 +61,9 @@ class ContactController extends Controller {
 
 	/**
 	 * ACTIVAR CUENTA
+	 * 
+	 * @param Request $request necessary
+	 * @return view ActivateForm
 	 */
 	public function activateAction(Request $request) {
 		$user = $this->getUser();

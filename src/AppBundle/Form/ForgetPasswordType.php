@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * ForgetPasswordType, form to recover password
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

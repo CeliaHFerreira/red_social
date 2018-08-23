@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Score, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,21 +10,29 @@ namespace BackendBundle\Entity;
 class Score
 {
     /**
+	 * id score
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * score
+	 * 
      * @var integer
      */
     private $score;
 
     /**
+	 * id melody
+	 * 
      * @var \BackendBundle\Entity\Melody
      */
     private $melody;
 
     /**
+	 * id user
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $user;

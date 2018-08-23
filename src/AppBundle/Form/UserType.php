@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * UserType, form to change user data
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

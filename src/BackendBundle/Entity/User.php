@@ -14,56 +14,77 @@ use Serializable;
 class User implements AdvancedUserInterface {
 
 	/**
+	 * id
+	 * 
 	 * @var integer
 	 */
 	private $id;
 
 	/**
+	 * name user
+	 * 
 	 * @var string
 	 */
 	private $name;
 
 	/**
+	 * surname user
+	 * 
 	 * @var string
 	 */
 	private $surname;
 
 	/**
+	 * username user
+	 * 
 	 * @var string
 	 */
 	private $username;
 
 	/**
+	 * email user
+	 * 
 	 * @var string
 	 */
 	private $email;
 
 	/**
+	 * password
+	 * 
 	 * @var string
 	 */
 	private $password;
 
 	/**
+	 * role
+	 * 
 	 * @var string
 	 */
 	private $role;
 
 	/**
+	 * description
+	 * 
 	 * @var string
 	 */
 	private $description;
 
 	/**
+	 * image
+	 * 
 	 * @var string
 	 */
 	private $image;
 
 	/**
+	 * activate
+	 * 
 	 * @var string
 	 */
 	private $active;
 	
 	/**
+	 * changePassword key
 	 * @var string
 	 */
 	private $changepassword;

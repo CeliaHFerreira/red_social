@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Like, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,16 +10,22 @@ namespace BackendBundle\Entity;
 class Like
 {
     /**
+	 * id like
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * id melody
+	 * 
      * @var \BackendBundle\Entity\Melody
      */
     private $melody;
 
     /**
+	 * id user
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $user;

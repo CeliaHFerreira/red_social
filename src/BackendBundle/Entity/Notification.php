@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Notification, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,36 +10,50 @@ namespace BackendBundle\Entity;
 class Notification
 {
     /**
+	 * id notification
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * type notification
+	 * 
      * @var string
      */
     private $type;
 
     /**
+	 * id type
+	 * 
      * @var integer
      */
     private $typeId;
 
     /**
+	 * readed notification
+	 * 
      * @var string
      */
     private $readed;
 
     /**
+	 * creation notification
+	 * 
      * @var \DateTime
      */
     private $creationDate;
 
     /**
+	 * extra variable
+	 * 
      * @var string
      */
     private $extra;
 
     /**
+	 * id user
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $user;

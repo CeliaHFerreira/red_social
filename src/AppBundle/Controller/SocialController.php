@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * SocialController, package used to manage social platform
+ */
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,6 +32,9 @@ class SocialController extends Controller {
 
 	/**
 	 * AÑADIR USUARIOS
+	 * 
+	 * @param Request $request necessary
+	 * @return response with the content 
 	 */
 	public function followAction(Request $request) {
 		$user = $this->getUser();
@@ -62,6 +67,9 @@ class SocialController extends Controller {
 
 	/**
 	 * ELIMINAR USUARIOS
+	 * 
+	 * @param Request $request necessary
+	 * @return response with the content
 	 */
 	public function unfollowAction(Request $request) {
 		$user = $this->getUser();
@@ -89,6 +97,10 @@ class SocialController extends Controller {
 
 	/**
 	 * MOSTRAR USUARIOS SIGUIENDO
+	 * 
+	 * @param Request $request necessary
+	 * @param string $username null in the beggining
+	 * @return view following
 	 */
 	public function followingAction(Request $request, $username = null) {
 		$em = $this->getDoctrine()->getManager();
@@ -124,6 +136,10 @@ class SocialController extends Controller {
 
 	/**
 	 * MOSTRAR USUARIOS SEGUIDORES
+	 * 
+	 * @param Request $request necessary
+	 * @param string $username null in the beggining
+	 * @return view followed
 	 */
 	public function followedAction(Request $request, $username = null) {
 		$em = $this->getDoctrine()->getManager();
@@ -159,6 +175,9 @@ class SocialController extends Controller {
 	
 	/**
 	 * LISTA DE USUARIOS, PAGINACIÓN
+	 * 
+	 * @param Request $request necessary
+	 * @return view of users
 	 */
 	public function usersAction(Request $request) {
 		$user = $this->getUser();
@@ -182,6 +201,9 @@ class SocialController extends Controller {
 	
 	/**
 	 * BUSCAR USUARIOS
+	 * 
+	 * @param Request $request necessary
+	 * @return view user search
 	 */
 	public function searchAction(Request $request) {
 		$user = $this->getUser();
@@ -213,6 +235,10 @@ class SocialController extends Controller {
 	
 	/**
 	 * VER PERFIL DE USUARIO
+	 * 
+	 * @param Request $request necessary
+	 * @param string $username null in the beggining
+	 * @return view profile
 	 */
 	public function profileAction(Request $request, $username = null) {
 		$user = $this->getUser();
