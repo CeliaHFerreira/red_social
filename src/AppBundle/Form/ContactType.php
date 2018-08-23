@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ContactType, form to send contact message
  */
 

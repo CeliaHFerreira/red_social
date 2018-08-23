@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * GetUserExtension, twig used to create a filter for users
  */
 namespace AppBundle\Twig;

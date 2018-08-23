@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * EditPasswordType, form to change password
  */
 namespace AppBundle\Form;

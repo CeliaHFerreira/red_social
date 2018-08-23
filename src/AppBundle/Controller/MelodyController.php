@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * MelodyController, package used to manage melodies
  */
 

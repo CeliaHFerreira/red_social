@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * ScoresExtension, twig used to create a filter for socres
  */
 namespace AppBundle\Twig;

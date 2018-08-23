@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * NotificationController, package used to manage notifications
  */
 namespace AppBundle\Controller;

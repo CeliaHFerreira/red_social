@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Time Extension, filter to know timed pased
+ */
 namespace AppBundle\Twig;
 
 /**

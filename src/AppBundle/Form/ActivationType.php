@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * ActivationType, form to activate account
  */
 

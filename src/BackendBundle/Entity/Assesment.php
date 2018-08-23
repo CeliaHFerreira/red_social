@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Assesment, entity
  */
 namespace BackendBundle\Entity;

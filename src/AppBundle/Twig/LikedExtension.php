@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * LikedExtension, twig used to create a filter for likes
  */
 namespace AppBundle\Twig;

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * SocialController, package used to manage social platform
  */
 namespace AppBundle\Controller;

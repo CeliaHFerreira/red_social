@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * NotificationService, service to manage notifications
  */
 

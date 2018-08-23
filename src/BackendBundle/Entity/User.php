@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * User, entity
+ */
 //Bundles
 
 namespace BackendBundle\Entity;

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * UserStatisticsExtension, twig used to create a filter for stats
  */
 namespace AppBundle\Twig;

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * UserType, form to change user data
  */
 namespace AppBundle\Form;
