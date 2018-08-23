@@ -213,11 +213,15 @@ class Notification
         return $this->user;
     }
     /**
+	 * id assest
+	 * 
      * @var integer
      */
     private $assestId;
 
     /**
+	 * creation date
+	 * 
      * @var \DateTime
      */
     private $createdAt;
