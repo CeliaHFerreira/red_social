@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Melody, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,16 +10,22 @@ namespace BackendBundle\Entity;
 class Melody
 {
     /**
+	 * id melody
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * name melody
+	 * 
      * @var string
      */
     private $name;
 
     /**
+	 * melody
+	 * 
      * @var string
      */
     private $melody;
@@ -28,11 +36,15 @@ class Melody
     private $image;
 
     /**
+	 * status melody
+	 * 
      * @var string
      */
     private $status;
 
     /**
+	 * creation melody
+	 * 
      * @var \DateTime
      */
     private $creationDate;

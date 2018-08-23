@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * ContactType, form to send contact message
+ */
+
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

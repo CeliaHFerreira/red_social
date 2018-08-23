@@ -9,12 +9,21 @@ namespace AppBundle\Twig;
  */
 class TimeExtension extends \Twig_Extension {
 
+	/**
+	 * FILTERS
+	 */
 	public function getFilters() {
 		return array(
 			new \Twig_SimpleFilter('time', array($this, 'TimeFilter')),
 		);
 	}
 
+	/**
+	 * TIME FILTER
+	 * 
+	 * @param string $date necessary
+	 * @return result of the filter
+	 */
 	public function TimeFilter($date) {
 		if ($date == null) {
 			return "Sin fecha";

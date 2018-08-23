@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * private message, entity
+ */
 namespace BackendBundle\Entity;
 
 /**
@@ -8,41 +10,57 @@ namespace BackendBundle\Entity;
 class PrivateMessage
 {
     /**
+	 * id private message
+	 * 
      * @var integer
      */
     private $id;
 
     /**
+	 * text message
+	 * 
      * @var string
      */
     private $text;
 
     /**
+	 * file added
+	 * 
      * @var string
      */
     private $file;
 
     /**
+	 * image added
+	 * 
      * @var string
      */
     private $image;
 
     /**
+	 * readed
+	 * 
      * @var string
      */
     private $readed;
 
     /**
+	 * creation message
+	 * 
      * @var \DateTime
      */
     private $creationDate;
 
     /**
+	 * id emitter
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $emitter;
 
     /**
+	 * id receiver
+	 * 
      * @var \BackendBundle\Entity\User
      */
     private $receiver;

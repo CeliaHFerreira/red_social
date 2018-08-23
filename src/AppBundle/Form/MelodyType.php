@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * MelodyType, form to publish melody
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

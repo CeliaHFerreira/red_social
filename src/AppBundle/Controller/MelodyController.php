@@ -1,9 +1,7 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * MelodyController, package used to manage melodies
  */
 
 namespace AppBundle\Controller;
@@ -31,13 +29,19 @@ use AppBundle\Form\CommentType;
 class MelodyController extends Controller {
 
 	private $session;
-
+	
+	/**
+	 * CONSTRUCTOR
+	 */
 	public function __construct() {
 		$this->session = new Session();
 	}
 
 	/**
 	 * CREAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @return view home
 	 */
 	public function indexAction(Request $request) {
 		$user = $this->getUser();
@@ -103,7 +107,13 @@ class MelodyController extends Controller {
 					'pagination' => $melodies
 		));
 	}
-
+	
+	/**
+	 * get melodies
+	 * 
+	 * @param Request $request necessary
+	 * @return pagination necessary for view home
+	 */
 	public function getMelodies($request) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -139,6 +149,10 @@ class MelodyController extends Controller {
 
 	/**
 	 * ELIMINAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @param string $id null in the beggining
+	 * @return response answer with the result
 	 */
 	public function removeMelodyAction(Request $request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
@@ -198,6 +212,10 @@ class MelodyController extends Controller {
 
 	/**
 	 * COMENTAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @param strin $id null in the beggining
+	 * @return view melody or home
 	 */
 	public function commentMelodyAction(Request $request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
@@ -259,6 +277,12 @@ class MelodyController extends Controller {
 		}
 	}
 
+	/**
+	 * get comments
+	 * 
+	 * @param Request $request necessary
+	 * @return pagination necessary for view melody
+	 */
 	public function getComments($request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -280,6 +304,10 @@ class MelodyController extends Controller {
 
 	/**
 	 * BORRAR COMENTARIO
+	 * 
+	 * @param Request $request necessary
+	 * @param strin $id null in the beggining
+	 * @return response answer with the result
 	 */
 	public function deleteCommentAction(Request $request, $id = null) {
 		$user = $this->getUser();
@@ -317,6 +345,12 @@ class MelodyController extends Controller {
 		return new Response($status);
 	}
 
+	/**
+	 * PUBLICAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @return view music
+	 */
 	public function musicAction(Request $request) {
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
@@ -373,6 +407,9 @@ class MelodyController extends Controller {
 
 	/**
 	 * DAR A LIKE
+	 * 
+	 * @param string $id null in the beggining
+	 * @return response answer with the result
 	 */
 	public function likeAction($id = null) {
 		$user = $this->getUser();
@@ -403,6 +440,9 @@ class MelodyController extends Controller {
 
 	/**
 	 * QUITAR LIKE
+	 * 
+	 * @param string $id null in the beggining
+	 * @return response answer with the result
 	 */
 	public function unlikeAction($id = null) {
 		$user = $this->getUser();
@@ -438,7 +478,13 @@ class MelodyController extends Controller {
 		return new Response($status);
 	}
 
-	//Ver Me gustas
+	/**
+	 * VER LIKES
+	 * 
+	 * @param Request $request necessary
+	 * @param string $username null in the beggining
+	 * @return view likes
+	 */
 	public function likedAction(Request $request, $username = null) {
 		$em = $this->getDoctrine()->getManager();
 
@@ -467,8 +513,15 @@ class MelodyController extends Controller {
 		));
 	}
 
-	//VALORACION DE MELODIAAAS
-
+	
+	/**
+	 * VALORAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @param string $id null in the beggining
+	 * @param string $value null in the beggining
+	 * @return response answer with the result
+	 */
 	public function scoreAction(Request $request, $id = null, $value = null) {
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
@@ -518,7 +571,13 @@ class MelodyController extends Controller {
 		return new Response($status);
 	}
 
-	//Estadísticas melodía
+	/**
+	 * VALORAR MELODÍA
+	 * 
+	 * @param Request $request necessary
+	 * @param string $id null in the beggining
+	 * @return view stats
+	 */
 	public function statsMelodyAction(Request $request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -540,6 +599,12 @@ class MelodyController extends Controller {
 		}
 	}
 
+	/**
+	 * get likes
+	 * 
+	 * @param Request $request necessary
+	 * @return pagination necessary for view stats
+	 */
 	public function getLikes($request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
@@ -559,6 +624,12 @@ class MelodyController extends Controller {
 		return $pagination;
 	}
 
+	/**
+	 * get comments
+	 * 
+	 * @param Request $request necessary
+	 * @return pagination necessary for view stats
+	 */
 	public function getScores($request, $id = null) {
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
