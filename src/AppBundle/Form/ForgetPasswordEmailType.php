@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * ForgetPasswordEmailType, form to recover password with email
  */
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Notification, entity
  */
 namespace BackendBundle\Entity;

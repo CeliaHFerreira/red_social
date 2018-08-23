@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * UsersController, package used to manage users
  */
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * FollowingExtension, twig used to create a filter for follows between users
  */
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Like, entity
  */
 namespace BackendBundle\Entity;

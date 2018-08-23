@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Melody, entity
  */
 namespace BackendBundle\Entity;

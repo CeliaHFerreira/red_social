@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * PrivateMessageType, form to send private message
  */
 namespace AppBundle\Form;

@@ -1,8 +1,10 @@
 <?php
+
 /**
-  * Description for ContactController, package used to manage contact
-  *
-  */
+ * Description for ContactController, package used to manage contact
+ *
+ */
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

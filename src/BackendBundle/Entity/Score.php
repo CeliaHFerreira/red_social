@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Score, entity
  */
 namespace BackendBundle\Entity;

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * private message, entity
  */
 namespace BackendBundle\Entity;

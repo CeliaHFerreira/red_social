@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * ForgetPasswordType, form to recover password
  */
 namespace AppBundle\Form;

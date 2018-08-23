@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * MelodyType, form to publish melody
  */
 namespace AppBundle\Form;

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * GetMelodyExtension, twig used to create a filter for melodies
  */
 namespace AppBundle\Twig;

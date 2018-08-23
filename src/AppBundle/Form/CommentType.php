@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * CommentType, form to comment melody
  */
 

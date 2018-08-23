@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * PrivateMessageController, package used to manage private messages
  */
 namespace AppBundle\Controller;

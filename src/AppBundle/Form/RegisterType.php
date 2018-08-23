@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * RegisterType, form to register user
  */
 namespace AppBundle\Form;
