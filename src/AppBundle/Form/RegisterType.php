@@ -72,7 +72,10 @@ class RegisterType extends AbstractType {
 					'label' => 'Marcar si desea tener opciones de composición  ',
 					'value' => true,
 					'mapped' => false,
-					'required' => false
+					'required' => false,
+					"attr" => array(
+						"class" => "form-checkbox"
+					)
 				))
 				->add('Registrarse', SubmitType::class, array(
 					"attr" => array(

@@ -196,9 +196,6 @@ body{
 }
 
 
-
-
-
 /*******************
  * REGISTRO Y FORMS
  *******************/
@@ -217,6 +214,11 @@ body{
 
 .form-box .form-control{
 	margin-bottom: 1%;
+}
+
+input[type="checkbox"] {
+    box-sizing: border-box;
+    margin: 4%;
 }
 
 .form-box .btn{
