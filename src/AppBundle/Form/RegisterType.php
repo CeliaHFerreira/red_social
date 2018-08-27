@@ -1,7 +1,9 @@
 <?php
+
 /**
  * RegisterType, form to register user
  */
+
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -12,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 /**
  * Description of RegisterType
@@ -52,12 +55,18 @@ class RegisterType extends AbstractType {
 						'class' => 'form-email form-control'
 					)
 				))
-				->add('password', PasswordType::class, array(
-					'label' => 'Contraseña',
-					'required' => 'required',
-					'attr' => array(
-						'class' => 'form-password form-control'
-					)
+				->add('password', RepeatedType::class, array(
+					'type' => PasswordType::class,
+					'first_options' => array(
+						'label' => 'Contraseña',
+						'attr' => array(
+							'class' => 'form-password form-control'
+						)),
+					'second_options' => array(
+						'label' => 'Repetir Contraseña',
+						'attr' => array(
+							'class' => 'form-password form-control'
+						)),
 				))
 				->add('role', CheckboxType::class, array(
 					'label' => 'Marcar si desea tener opciones de composición  ',

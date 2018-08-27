@@ -97,7 +97,7 @@ class ContactController extends Controller {
 					$message = \Swift_Message::newInstance()
 							->setSubject("Activacion de cuenta en MeloDJ")
 							->setFrom("rasptfg@gmail.com")
-							->setTo("celiahrrferreira@gmail.com")
+							->setTo($user->getEmail())
 							->setBody(
 							'<html>' .
 							'<h1>¡Hola!</h1>' .
