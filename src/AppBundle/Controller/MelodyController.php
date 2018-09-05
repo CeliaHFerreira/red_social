@@ -29,7 +29,7 @@ use AppBundle\Form\CommentType;
 class MelodyController extends Controller {
 
 	private $session;
-	
+
 	/**
 	 * CONSTRUCTOR
 	 */
@@ -107,7 +107,7 @@ class MelodyController extends Controller {
 					'pagination' => $melodies
 		));
 	}
-	
+
 	/**
 	 * get melodies
 	 * 
@@ -257,6 +257,10 @@ class MelodyController extends Controller {
 			}
 			$comments = $this->getComments($request, $melody);
 
+			unset($comment);
+			unset($form);
+			$comment = new Assesment();
+			$form = $this->createForm(CommentType::class);
 			return $this->render('@App/Melody/melody.html.twig', array(
 						'melody' => $melody,
 						'form' => $form->createView(),
@@ -514,7 +518,6 @@ class MelodyController extends Controller {
 		));
 	}
 
-	
 	/**
 	 * VALORAR MELODÍA
 	 * 
@@ -573,7 +576,7 @@ class MelodyController extends Controller {
 	}
 
 	/**
-	 * VALORAR MELODÍA
+	 * ESTADISTICAS MELODÍA
 	 * 
 	 * @param Request $request necessary
 	 * @param string $id null in the beggining
@@ -588,12 +591,14 @@ class MelodyController extends Controller {
 
 		$likes = $this->getLikes($request, $melody);
 		$scores = $this->getScores($request, $melody);
-
+		$scoreMelody = $this->getTotalScore($request, $melody);
+		
 		if (!empty($melody) && $owner == $user) {
 			return $this->render('@App/Melody/stats_melody.html.twig', array(
 						'melody' => $melody,
 						'pagination_likes' => $likes,
-						'pagination_scores' => $scores
+						'pagination_scores' => $scores,
+						'scoreMelody' => $scoreMelody
 			));
 		} else {
 			return $this->redirectToRoute('app_homepage');
@@ -627,7 +632,7 @@ class MelodyController extends Controller {
 	}
 
 	/**
-	 * get comments
+	 * get scores
 	 * 
 	 * @param Request $request necessary
 	 * @param string $id null in the beggining
@@ -650,6 +655,27 @@ class MelodyController extends Controller {
 		);
 
 		return $pagination;
+	}
+	
+	/**
+	 * get total score of a melody
+	 * 
+	 * @param Request $request necessary
+	 * @param string $id null in the beggining
+	 * @return total scores number
+	 */
+	public function getTotalScore(Request $request, $id = null){
+		$em = $this->getDoctrine()->getManager();
+		
+		$score_repo = $em->getRepository('BackendBundle:Score');
+		$scores = $score_repo->findBy(array(
+			'melody' => $id
+		));
+		$totalScore = 0;
+		foreach ($scores as $score) {
+			$totalScore += $score->getScore();
+		}
+		return $totalScore;
 	}
 
 }

@@ -32,7 +32,7 @@ class MelodyType extends AbstractType {
 					)
 				))
 				->add('melody', FileType::class, array(
-					'label' => 'Mifi File (.mid)',
+					'label' => 'Midi File (.mid)',
 					'required' => true,
 					'data_class' => null,
 					'attr' => array(
