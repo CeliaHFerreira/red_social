@@ -1,77 +1,61 @@
-Symfony Standard Edition
-========================
+MeloDJ
+======
 
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+MeloDJ es una red social desarrollada en PHP y Javascript con ayuda del Framework [Symfony 3.4](https://symfony.com/)
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Esta red social de temática musical tiene una funcionalidad básica: realizar publicaciones (melodías) por parte de unos
+usuarios compositores para que después estas sean valoradas y comentadas por el resto de usuarios. Se permite también
+la búsqueda y seguimiento de usuarios, además de la configuración de ciertos datos personales de las cuentas de usuario
+y el envío de mensajes privados. Como ya se ha comentado, al ser una red social de temática musical, su principal virtud
+reside en la posibilidad de realizar composiciones musicales automáticas mediante una red neuronal. El sistema será capaz
+de componer melodías en función de unos parámetros definidos por el usuario.
 
-What's inside?
+
+¿Qué contiene?
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+La aplicación está organizada en una serie de directorios:
 
-  * An AppBundle you can use to start coding;
+      app/              contiene la configuración de la aplicación
+      bin/              contiene comandos de consola
+      src/              contiene todo el código PHP de la aplicación (bundles)
+      test/             contiene los test generados
+      var/              contiene los archivos generados en el tiempo de ejecución
+      vendor/           contiene paquetes dependientes de terceras partes
+      web/              contiene tests para la aplicación
+        assets/         directorio web raíz. Contiene todos los archivos que se pueden acceder públicamente
+          css/          archivos css
+          js/           archivos js
+        uploads/        contiene los archivos subidos por los usuarios
 
-  * Twig as the only configured template engine;
 
-  * Doctrine ORM/DBAL;
+Requisitos
+----------
 
-  * Swiftmailer;
+Para su instalación y funcionamientos, se necesita un servidor web que soporte PHP 5 o superior. Además se deberán instalar una
+serie de dependencias de terceros mediante el archivo composer.json. Para su correcto funcionamiento deberá aumentarse, en el archivo de configuración php.ini el valor de tiempo máximo de ejecución (EXECUTION_TIME).
 
-  * Annotations enabled for everything.
 
-It comes pre-configured with the following bundles:
+Configuración
+-------------
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+Para configurar la base de datos y el servidor de correo, será necesario editar el archivo app/config/parameters.yml con los 
+datos correctos, como por ejemplo:
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+    parameters:
+        database_host: 127.0.0.1
+        database_port: null
+        database_name: red_social
+        database_user: root
+        database_password: password
+        mailer_transport: gmail
+        mailer_user: correo@gmail.com
+        mailer_password: passwordCorreo
+        secret: ThisIsNotSecretChangeIt
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+Autor
+-----
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
-
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+Celia Herrera Ferreira:
+Estudiante del Grado en Ingeniería Informática de la Universidad de Salamanca
