@@ -57,7 +57,7 @@
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade active show" id="home">
 				<br/>
-				<p>Total: {{ pagination_likes.getTotalItemCount }}</p>
+				<p>Número me gusta: {{ pagination_likes.getTotalItemCount }}</p>
 				<br/>
 				{% for like in pagination_likes %}
 					<div class="melody-item">
@@ -86,7 +86,11 @@
 			</div>
 			<div class="tab-pane fade" id="profile">
 				<br/>
-				<p>Total: {{ pagination_scores.getTotalItemCount }}</p>
+				{%if pagination_scores.getTotalItemCount == 0%}
+					<p>Puntuación total: {{ pagination_scores.getTotalItemCount }}</p>
+				{% else %}
+					<p>Puntuación total: {{ scoreMelody / pagination_scores.getTotalItemCount }}</p>
+				{% endif %}
 				<br/>
 				{% for score in pagination_scores %}
 					<div class="melody-item">
